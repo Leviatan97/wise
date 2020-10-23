@@ -13,7 +13,7 @@ class server {
         this.publicPath = path.join(__dirname, 'public'); 
         this.app = express()
         this.server1 = http.createServer(this.app)
-        this.io = socketIO(this.server_)
+        this.io = socketIO(this.server1)
         this.initialSetup()
         this.setPort()
         this.listenPort()
