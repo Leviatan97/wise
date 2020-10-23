@@ -6,13 +6,13 @@ const path = require('path')
 
 class server {
     app
-    server_
+    server1
     io
     publicPath
     constructor() {
         this.publicPath = path.join(__dirname, 'public'); 
         this.app = express()
-        this.server_ = http.createServer(this.app)
+        this.server1 = http.createServer(this.app)
         this.io = socketIO(this.server_)
         this.initialSetup()
         this.setPort()
