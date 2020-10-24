@@ -6,12 +6,7 @@ const path = require('path')
 
 class server {
     
-    constructor(
-        app, 
-        server_, 
-        io, 
-        publicPath
-        ) 
+    constructor(app, server_, io, publicPath) 
     {
         this.app = express()
         this.server_ = http.createServer(this.app)
