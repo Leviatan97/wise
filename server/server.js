@@ -16,7 +16,6 @@ class server {
         this.io = socketIO(this.server_)
         this.publicPath = path.join(__dirname, '../public')
         this.initialSetup()
-        this.setPort()
         this.listenPort()
         this.socketSetup()
     }
@@ -34,12 +33,8 @@ class server {
         })
     }
 
-    setPort() {
-        this.server_.set('port',3000)
-    }
-
     listenPort() {
-        const server = this.app.listen(this.server_.get('port'),()=>{
+        const server = this.server_.listen(3000,()=>{
             console.log(`Server started on port ${this.app.get('port')}`)
         })
         return server
