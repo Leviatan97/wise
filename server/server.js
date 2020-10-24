@@ -28,7 +28,7 @@ class server {
     }
 
     socketSetup() {
-        this.io.on('connection',(socket)=>{
+        return this.io.on('connection',(socket)=>{
             console.log("Connection " + socket.id);
                 io.emit('hola');
                 io.to(socket.id).emit('conn', 0);
