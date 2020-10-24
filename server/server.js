@@ -14,7 +14,7 @@ class server {
         this.app = express()
         this.server_ = http.createServer(this.app)
         this.io = socketIO(this.server_)
-        this.publicPath = path.join(__dirname, 'public')
+        this.publicPath = path.join(__dirname, '../public')
         this.initialSetup()
         this.setPort()
         this.listenPort()
@@ -28,8 +28,9 @@ class server {
     }
 
     socketSetup() {
-        return this.io.on('connection',(socket)=>{
+        this.io.on('connection',(socket)=>{
             console.log("Connection " + socket.id);
+            this.io.send(socket)
         })
     }
 
