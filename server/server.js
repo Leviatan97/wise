@@ -35,11 +35,11 @@ class server {
     }
 
     setPort() {
-        this.app.set('port',3000)
+        this.server_.set('port',3000)
     }
 
     listenPort() {
-        const server = this.app.listen(this.app.get('port'),()=>{
+        const server = this.app.listen(this.server_.get('port'),()=>{
             console.log(`Server started on port ${this.app.get('port')}`)
         })
         return server
