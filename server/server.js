@@ -5,14 +5,13 @@ const http = require('http')
 const path = require('path')
 
 class server {
-    app
+    app = express()
     constructor( 
         server_ = http.createServer(this.app), 
         io = socketIO(this.server_), 
         publicPath = path.join(__dirname, 'public')
         ) 
     {
-        this.app = express()
         this.initialSetup()
         this.setPort()
         this.listenPort()
