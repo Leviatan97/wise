@@ -10,7 +10,7 @@ class socketPlayer {
     }
 
     playerHostJoin(socket) {
-        return socket.on('player-host-join',logicPlayer_.playerHostJoin)
+        return socket.on('player-host-join',logicPlayer_.playerHostJoin(socket))
     }
 
     hostJoinGame(socket, io) {
