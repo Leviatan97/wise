@@ -56,7 +56,7 @@ class logicPlayer {
         }
     }
 
-    hostJoinGame(data) {
+    hostJoinGame(data, socket) {
         var oldHostId = data.id;  
         var gamepin2 = Math.floor(Math.random()*90000) + 10000; //new pin for game
         console.log(data+" id encontrado, id generado... "+gamepin2+" socket id: "+socket.id);
