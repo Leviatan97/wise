@@ -14,9 +14,7 @@ class socketPlayer {
     }
 
     hostJoinGame(socket) {
-        console.log(socket.id)
-        logicPlayer_.setSocketId(socket.id)
-        return socket.on('host-join-game',logicPlayer_.hostJoinGame)
+        return socket.on('host-join-game',logicPlayer_.hostJoinGame(socket.id))
     }
 }
 
