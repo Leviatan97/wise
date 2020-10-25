@@ -3,7 +3,7 @@ const cors = require('cors')
 const socketIO = require('socket.io')
 const http = require('http')
 const path = require('path')
-
+const {socketPlayer} = require('../socket/socketPlayer')
 
 class server {
     
@@ -27,7 +27,7 @@ class server {
     socketSetup() {
         this.io.on('connection',(socket)=>{
             console.log("Connection " + socket.id);
-            
+            socketPlayer.hostJoin(socket)
         })
     }
 
