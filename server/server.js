@@ -3,9 +3,7 @@ const cors = require('cors')
 const socketIO = require('socket.io')
 const http = require('http')
 const path = require('path')
-var MongoClient = require('mongodb').MongoClient;
-var mongoose = require('mongoose');
-var url = "mongodb://localhost:27017/";
+
 
 class server {
     
@@ -29,7 +27,7 @@ class server {
     socketSetup() {
         this.io.on('connection',(socket)=>{
             console.log("Connection " + socket.id);
-            this.io.send(socket)
+            
         })
     }
 
