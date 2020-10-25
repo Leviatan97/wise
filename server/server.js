@@ -30,6 +30,7 @@ class server {
             console.log("Connection " + socket.id);
             socketPlayer_.hostJoin(socket)
             socketPlayer_.playerHostJoin(socket)
+            socketPlayer_.hostJoinGame(socket)
         })
     }
 
