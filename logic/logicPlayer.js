@@ -7,8 +7,8 @@ const {moduleGame} = require('../module/moduleGame')
 const games = new moduleGame()
 
 class logicPlayer {
-
-    constructor(socketId) {}
+    socketId
+    constructor() {}
 
     setSocketId(id) {
         this.socketId = id;
