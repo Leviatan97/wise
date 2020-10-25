@@ -1,6 +1,8 @@
 const MongoClient = require('mongodb').MongoClient;
 const mongoose = require('mongoose');
 const url = "mongodb://localhost:27017/";
+const {modulePlayers} = require('../module/modulePlayer');
+const players = new modulePlayers()
 
 class logicPlayer {
 
@@ -39,6 +41,21 @@ class logicPlayer {
                 });
             });
     }
+
+    playerHostJoin(params) {
+        console.log('entro host');
+        //For each game in the Games class
+        for(var i = 0; i < games.games.length; i++){
+            //If the pin is equal to one of the game's pin
+            if(params.pin == games.games[i].pin){                
+                console.log('Player connected to game');                
+                var hostId = games.games[i].hostId; //Get the id of host of game              
+                players.addPlayer(hostId, socket.id, params.nameID, params.profilePic,games.games[i].currPosToInit); //add player to game               
+                games.games[i].currPosToInit++;
+               }
+        }
+    }
+
 }
 
 module.exports = {logicPlayer}
