@@ -5,17 +5,15 @@ const {modulePlayers} = require('../module/modulePlayer');
 const players = new modulePlayers()
 const {moduleGame} = require('../module/moduleGame')
 const games = new moduleGame()
+const sokectId
 
 class logicPlayer {
-    socketId
+    
     constructor() {}
 
     setSocketId(id) {
-        this.socketId = id;
-    }
-
-    getSocketId() {
-        return this.socketId
+        sokectId = id;
+        console.log(socketId)
     }
 
     hostJoin(data) {
@@ -67,8 +65,7 @@ class logicPlayer {
     }
 
     hostJoinGame(data) {
-        var id = this.socketId
-        console.log(id)
+        console.log("hostJoinGame")
         // var oldHostId = data.id;  
         // var gamepin2 = Math.floor(Math.random()*90000) + 10000; //new pin for game
         // console.log(data+" id encontrado, id generado... "+gamepin2+" socket id: "+id);
