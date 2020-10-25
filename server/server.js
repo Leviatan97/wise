@@ -4,6 +4,7 @@ const socketIO = require('socket.io')
 const http = require('http')
 const path = require('path')
 const {socketPlayer} = require('../socket/socketPlayer')
+const socketPlayer_ = new socketPlayer()
 
 class server {
     
@@ -27,7 +28,7 @@ class server {
     socketSetup() {
         this.io.on('connection',(socket)=>{
             console.log("Connection " + socket.id);
-            socketPlayer.hostJoin(socket)
+            socketPlayer_.hostJoin(socket)
         })
     }
 
