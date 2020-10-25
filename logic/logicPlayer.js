@@ -14,6 +14,10 @@ class logicPlayer {
         this.socketId = id;
     }
 
+    getSocketId() {
+        return this.socketId
+    }
+
     hostJoin(data) {
         console.log("Connection 2");
             //Check to see if id passed in url corresponds to id of kahoot game in database
@@ -64,7 +68,7 @@ class logicPlayer {
 
     hostJoinGame(data) {
         var id = this.socketId
-        console.log(id)
+        console.log(this.getSocketId())
         // var oldHostId = data.id;  
         // var gamepin2 = Math.floor(Math.random()*90000) + 10000; //new pin for game
         // console.log(data+" id encontrado, id generado... "+gamepin2+" socket id: "+id);
