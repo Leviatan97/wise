@@ -66,8 +66,8 @@ class logicPlayer {
             var gamepin2 = Math.floor(Math.random()*90000) + 10000; //new pin for game
             console.log(data+" id encontrado, id generado... "+gamepin2+" socket id: "+socket.id);
             games.addGame(gamepin2,socket.id,76);
-            io.to(id).emit('hola',{n: gamepin2 });
-            io.to(id).emit('conn');
+            io.to(socket.id).emit('hola',{n: gamepin2 });
+            io.to(socket.id).emit('conn');
             console.log("enviado");
         }
         
