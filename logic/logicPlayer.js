@@ -59,7 +59,7 @@ class logicPlayer {
         }
     }
 
-    hostJoinGame(socket) {
+    hostJoinGame(socket, io) {
 
         return (data)=>{
             var oldHostId = data.id;  
