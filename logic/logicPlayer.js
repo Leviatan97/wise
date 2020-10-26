@@ -76,6 +76,85 @@ class logicPlayer {
         
     }
 
+    updatePlayerSocketId(socket, io) {
+        return (params) => {
+            var player = players.getPlayer(params.oldId);
+            if(player)
+            {
+                players.updatePlayerId(socket.id, params.oldId);       
+                var game = games.getGame(player.hostId); //Gets the game data
+                var playersInGame = players.getPlayers(player.hostId);
+                io.to(player.playerId).emit('refreshBallots', game.activeBallots);//Sending player all ballots 
+                var sockets = new Array(params.oldId, socket.id);
+                for(var n = 0; n < playersInGame.length; n++){
+                        io.to(playersInGame[n].playerId).emit('updatePlayerId', sockets);//Sending players old and new sockets                                     
+                }
+                console.log("player cambio su Id de: "+params.oldId+" a: "+ socket.id); 
+            }
+        }
+    }
+
+    playerJoin(io) {
+        return (params) => {
+            console.log('entra '+params.nameID +' '+params+' '+params.pin);
+            var gameFound = false; //If a game is found with pin provided by player
+            
+            //For each game in the Games class
+            for(var i = 0; i < games.games.length; i++){
+                //If the pin is equal to one of the game's pin
+                if(params.pin == games.games[i].pin){
+                    
+                    console.log('Player connected to game');
+                    
+                    var hostId = games.games[i].hostId; //Get the id of host of game
+                    
+                    
+                    players.addPlayer(hostId, socket.id, params.nameID, params.profilePic,games.games[i].currPosToInit); //add player to game               
+                    games.games[i].currPosToInit++;
+                    socket.join(params.pin); //Player is joining room based on pin
+                    
+                    var playersInGame = players.getPlayers(hostId); 
+                    console.log('Players connected '+playersInGame);
+                    io.to(params.pin).emit('playerJoinGame', playersInGame);//Sending players data to display
+                    io.to(hostId).emit('updateLobby', playersInGame);//Sending host player data to display
+                    gameFound = true; //Game has been found
+                }else{
+                    
+                    console.log('no encontro lobby');
+                }
+            }
+            
+            //If the game has not been found
+            if(gameFound == false){
+                    console.log('no encontro lobby');
+                socket.emit('noGameFound'); //Player is sent back to 'join' page because game was not found with pin
+            }
+        }
+    }
+
+    playerEnterGame(socket) {
+        return (params) => {
+            var player = players.getPlayer(socket.id);
+            if(player)
+            {
+                console.log("callback from: "+player.nameId)
+                player.onGame = true;
+            }
+        }
+    }
+
+    playerSendEmoji() {
+        return (params) => {
+            var player = players.getPlayer(socket.id);        
+            var game = games.getGame(player.hostId); //Gets the game data
+            var playersInGame = players.getPlayers(player.hostId);
+                for(var n = 0; n < playersInGame.length; n++)
+                {
+                    io.to(playersInGame[n].playerId).emit('emojiReceived', params);//Sending players a ballot                                     
+                }
+        }
+    }
+
 }
 
 module.exports = {logicPlayer}

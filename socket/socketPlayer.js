@@ -17,10 +17,30 @@ class socketPlayer {
         return socket.on('host-join-game',logicPlayer_.hostJoinGame(socket, io))
     }
 
+    updatePlayerSocketId(socket, io) {
+        return socket.on('updatePlayerSocketId',logicPlayer_.updatePlayerSocketId(socket, io))
+    }
+
+    playerJoin(socket, io) {
+        return socket.on('player-join', logicPlayer_.playerJoin(io))
+    }
+
+    playerEnterGame(socket) {
+        return socket.on('playerEnterGame', logicPlayer_.playerEnterGame(socket))
+    }
+
+    playerSendEmoji(socket, io) {
+        socket.on('player-send-emoji', logicPlayer_.playerSendEmoji(io))
+    }
+
     socketsPlayer(socket, io) {
         this.hostJoin(socket)
         this.playerHostJoin(socket)
         this.hostJoinGame(socket, io)
+        this.updatePlayerSocketId(socket, io)
+        this.playerJoin(sokect, io)
+        this.playerEnterGame(socket)
+        this.playerSendEmoji(socket, io)
     }
 }
 
