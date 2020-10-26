@@ -30,7 +30,7 @@ class socketPlayer {
     }
 
     playerSendEmoji(socket, io) {
-        socket.on('player-send-emoji', logicPlayer_.playerSendEmoji(io))
+        socket.on('player-send-emoji', logicPlayer_.playerSendEmoji(socket, io))
     }
 
     socketsPlayer(socket, io) {
