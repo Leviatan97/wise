@@ -38,7 +38,7 @@ class socketPlayer {
         this.playerHostJoin(socket)
         this.hostJoinGame(socket, io)
         this.updatePlayerSocketId(socket, io)
-        this.playerJoin(sokect, io)
+        this.playerJoin(socket, io)
         this.playerEnterGame(socket)
         this.playerSendEmoji(socket, io)
     }
