@@ -28,9 +28,7 @@ class server {
     socketSetup() {
         this.io.on('connection',(socket)=>{
             console.log("Connection " + socket.id);
-            socketPlayer_.hostJoin(socket)
-            socketPlayer_.playerHostJoin(socket)
-            socketPlayer_.hostJoinGame(socket,this.io)
+            socketPlayer_.socketsPlayer(socket, this.io)
         })
     }
 

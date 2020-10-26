@@ -16,6 +16,12 @@ class socketPlayer {
     hostJoinGame(socket, io) {
         return socket.on('host-join-game',logicPlayer_.hostJoinGame(socket, io))
     }
+
+    socketsPlayer(socket, io) {
+        this.hostJoin(socket)
+        this.playerHostJoin(socket)
+        this.hostJoinGame(socket, io)
+    }
 }
 
 module.exports = {socketPlayer}
