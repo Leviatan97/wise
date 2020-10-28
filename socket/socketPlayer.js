@@ -50,7 +50,7 @@ class socketPlayer {
         return socket.on('newTurn', logicPlayer_.newTurn(io))
     }
 
-    minigameDice(socket) {
+    minigameDice(socket, io) {
         return socket.on('minigameDice', logicPlayer_.minigameDice(socket, io))
     }
 
