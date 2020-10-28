@@ -23,7 +23,7 @@ class socketPlayer {
     }
 
     playerJoin(socket, io) {
-        return socket.on('player-join', logicPlayer_.playerJoin(io))
+        return socket.on('player-join', logicPlayer_.playerJoin(socket, io))
     }
 
     playerEnterGame(socket) {

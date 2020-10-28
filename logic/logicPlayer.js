@@ -94,7 +94,7 @@ class logicPlayer {
         }
     }
 
-    playerJoin(io) {
+    playerJoin(socket, io) {
         return (params) => {
             console.log('entra '+params.nameID +' '+params+' '+params.pin);
             var gameFound = false; //If a game is found with pin provided by player
