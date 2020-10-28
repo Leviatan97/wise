@@ -32,7 +32,7 @@ class server {
             console.log("Connection " + socket.id);
             this.io.emit('hola');
             socketPlayer_.socketsPlayer(socket, this.io)
-            socketGameCount_.socketsGameCount(socket, io)  
+            socketGameCount_.socketsGameCount(socket, this.io)  
         })
     }
 
