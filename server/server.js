@@ -4,6 +4,8 @@ const socketIO = require('socket.io')
 const http = require('http')
 const path = require('path')
 const {socketPlayer} = require('../socket/socketPlayer')
+const {socketGameCount} = require('../socket/socketGameCount')
+const socketGameCount_ = new socketGameCount()
 const socketPlayer_ = new socketPlayer()
 
 class server {
@@ -29,6 +31,7 @@ class server {
         this.io.on('connection',(socket)=>{
             console.log("Connection " + socket.id);
             socketPlayer_.socketsPlayer(socket, this.io)
+            socketGameCount_.socketsGameCount(socket, io)  
         })
     }
 
