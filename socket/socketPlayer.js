@@ -43,11 +43,11 @@ class socketPlayer {
     }
 
     hostStartBingoGame(socket, io) {
-        return socket.on('host-start-bingo-game', logicPlayer_.hostStartBingoGame(io))
+        return socket.on('host-start-bingo-game', logicPlayer_.hostStartBingoGame(socket, io))
     }
 
     newTurn(socket, io) {
-        return socket.on('newTurn', logicPlayer_.newTurn(io))
+        return socket.on('newTurn', logicPlayer_.newTurn(socket, io))
     }
 
     minigameDice(socket, io) {
@@ -58,12 +58,12 @@ class socketPlayer {
         return socket.on('clearInterval', logicPlayer_.clearInterval(socket, io))
     }
 
-    clear(socket) {
-        return socket.on('clear', logicPlayer_.clear(socket))
+    clear(socket, io) {
+        return socket.on('clear', logicPlayer_.clear(socket, io))
     }
 
-    endMiniGame(socket) {
-        return socket.on('endminigame', logicPlayer_.endMiniGame(socket))
+    endMiniGame(socket, io) {
+        return socket.on('endminigame', logicPlayer_.endMiniGame(socket, io))
     }
 
     socketsPlayer(socket, io) {

@@ -223,7 +223,7 @@ class logicPlayer {
         }
     }
 
-    hostStartBingoGame(io) {
+    hostStartBingoGame(socket, io) {
         return (params) => {
             var gameFound = false; //If a game is found with pin provided by player
             var gamePos;
@@ -252,7 +252,7 @@ class logicPlayer {
         }
     }
 
-    newTurn(io) {
+    newTurn(socket, io) {
         return (params) => {
             var player = players.getPlayer(socket.id);        
             var game = games.getGame(player.hostId); //Gets the game data        
@@ -378,7 +378,7 @@ class logicPlayer {
         }
     }
 
-    clear(socket) {
+    clear(socket, io) {
         return (params) => {
             var player = players.getPlayer(socket.id);        
             var game = games.getGame(player.hostId); //Gets the game data        
@@ -386,7 +386,7 @@ class logicPlayer {
         }
     }
 
-    endMiniGame(socket) {
+    endMiniGame(socket, io) {
         return (params) => {
             console.log("ending minigame");
             var player = players.getPlayer(socket.id);        
