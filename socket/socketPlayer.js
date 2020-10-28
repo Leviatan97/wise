@@ -1,4 +1,5 @@
-const {logicPlayer} = require('../logic/logicPlayer')
+const {logicPlayer} = require('../logic/logicPlayer');
+const socketGameCount = require('./socketGameCount');
 const logicPlayer_ = new logicPlayer()
 
 class socketPlayer {
@@ -33,6 +34,38 @@ class socketPlayer {
         socket.on('player-send-emoji', logicPlayer_.playerSendEmoji(socket, io))
     }
 
+    playerAttemptToWin(socket, io) {
+        return socket.on('player-attempt-to-win', logicPlayer_.playerAttemptToWin(socket, io))
+    }
+
+    playerJoinGame(socket) {
+        return socket.on('player-join-game', logicPlayer_.playerJoinGame(socket))
+    }
+
+    hostStartBingoGame(socket, io) {
+        return socket.on('host-start-bingo-game', logicPlayer_.hostStartBingoGame(io))
+    }
+
+    newTurn(socket, io) {
+        return socket.on('newTurn', logicPlayer_.newTurn(io))
+    }
+
+    minigameDice(socket) {
+        return socket.on('minigameDice', logicPlayer_.minigameDice(socket, io))
+    }
+
+    clearInterval(socket, io) {
+        return socket.on('clearInterval', logicPlayer_.clearInterval(socket, io))
+    }
+
+    clear(socket) {
+        return socket.on('clear', logicPlayer_.clear(socket))
+    }
+
+    endMiniGame(socket) {
+        return socket.on('endminigame', logicPlayer_.endMiniGame(socket))
+    }
+
     socketsPlayer(socket, io) {
         this.hostJoin(socket)
         this.playerHostJoin(socket)
@@ -41,6 +74,13 @@ class socketPlayer {
         this.playerJoin(socket, io)
         this.playerEnterGame(socket)
         this.playerSendEmoji(socket, io)
+        this.playerAttemptToWin(socket, io)
+        this.playerJoinGame(socket)
+        this.newTurn(socket, io)
+        this.minigameDice(socket, io)
+        this.clearInterval(socket, io)
+        this.clear(socket)
+        this.endMiniGame(socket)
     }
 }
 

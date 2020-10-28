@@ -30,6 +30,7 @@ class server {
     socketSetup() {
         this.io.on('connection',(socket)=>{
             console.log("Connection " + socket.id);
+            io.emit('hola');
             socketPlayer_.socketsPlayer(socket, this.io)
             socketGameCount_.socketsGameCount(socket, io)  
         })

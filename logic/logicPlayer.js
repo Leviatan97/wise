@@ -155,6 +155,246 @@ class logicPlayer {
         }
     }
 
+    playerAttemptToWin(socket, io) {
+        return (params) => {
+            var gameFound = false; //If a game is found with pin provided by player
+            var gamePos;
+            var hostId;
+            var playersInGame;
+            var paramsPin;
+            var boardNumbers = new Array(params.Items);
+            var player = players.getPlayer(socket.id);
+            var errorOnBoard = new Boolean(false);
+            console.log('enviado desde '+ socket.id+' items lenght '+boardNumbers.lenght+player.hostId);
+            var game = games.getGame(player.hostId); //Gets the game data
+            playersInGame = players.getPlayers(player.hostId);
+            var errorsCounter = 0;
+            for(var i = 0; i < 25; i++)
+            {
+                if(game.activeBallots[params.Items[i]]==0)
+                {
+                    errorsCounter +=1;
+                    errorOnBoard = true;   
+                    console.log('la balota: '+params.Items[i]+' no ha salido');    
+                }            
+            }
+            if(errorsCounter<=0){
+                errorOnBoard = false;
+            }
+            console.log('tiene '+errorsCounter+' errores');
+            if(!errorOnBoard)
+            {     
+                console.log('lo logro '+game.intervalIdCB);
+                clearInterval(game.intervalIdCB);
+                console.log('No hay error');            
+                for(var i = 0; i < playersInGame.length; i++)
+                {
+                    if(playersInGame[i].playerId!=socket.id)
+                    {
+                        io.to(playersInGame[i].playerId).emit('a-player-win', player.nameId);//Tell players someopne win                                    
+                    }
+                }
+                io.to(socket.id).emit('ballots-check-Successful', 0);//Sending player win   
+            }else
+            {   
+                for(var i = 0; i < playersInGame.length; i++)
+                {
+                    io.to(playersInGame[i].playerId).emit('a-player-checking-failed', player.nameId);//Tell players someopne fail                                    
+                }
+                //io.to(socket.id).emit('ballots-check-error', 0);//Sending player fail   
+                console.log('Si hay error');         
+            }
+        }
+    }
+
+    playerJoinGame(socket) {
+        return (data) => {
+            var player = players.getPlayer(data.id);
+            if(player){
+                var game = games.getGame(player.hostId);
+                socket.join(game.pin);
+                player.playerId = socket.id;//Update player id with socket id
+                
+                var playerData = players.getPlayers(game.hostId);
+                socket.emit('playerGameData', playerData);
+            }else{
+                socket.emit('noGameFound');//No player found
+            }
+        }
+    }
+
+    hostStartBingoGame(io) {
+        return (params) => {
+            var gameFound = false; //If a game is found with pin provided by player
+            var gamePos;
+            var hostId;
+            var playersInGame;
+            var paramsPin;
+            var noBallotsLeft = new Boolean(false);
+            console.log('entra bingo');
+            //players.addPlayer(socket.id, socket.id, params.nameID); //add player to game
+            //For each game in the Games class
+            for(var i = 0; i < games.games.length; i++){
+                //If the pin is equal to one of the game's pin
+                if(params.pin == games.games[i].pin){
+                    gamePos = i;
+                    console.log('Host Start Game');
+                    
+                    hostId = games.games[i].hostId; //Get the id of host of game
+                    paramsPin = params.pin;
+                    playersInGame = players.getPlayers(hostId); 
+                    io.to(params.pin).emit('gameStarted', playersInGame);//Sending players data to display
+                    //io.to(hostId).emit('updateLobby', playersInGame);//Sending host player data to display
+                    gameFound = true; //Game has been found
+                }
+                
+            }
+        }
+    }
+
+    newTurn(io) {
+        return (params) => {
+            var player = players.getPlayer(socket.id);        
+            var game = games.getGame(player.hostId); //Gets the game data        
+            if(game.onTurn ==1){
+                game.onTurn = 0;
+                var playersInGame = players.getPlayers(player.hostId);
+                var iterations = 0;
+                var playerOnTurn; 
+                for(var n = 0; n < playersInGame.length; n++)
+                {
+                        if(playersInGame[n].onGame ==false)
+                        {
+                            console.log("player "+playersInGame[n].playerId+" i outside");
+                            io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
+                        }
+                }
+                if(typeof game.intervalIdCB === 'undefined'){         
+                    console.log('murio al principio '+game.intervalIdCB);
+                    clearInterval(game.intervalIdCB);
+                }
+                ///    for(var n = 0; n < playersInGame.length; n++)
+                //    {
+                //        io.to(playersInGame[n].playerId).emit('emojiReceived', params);//Sending players a ballot                                     
+                //    }        
+                var intervalID = setInterval(SetBallot, 10000);
+                game.intervalIdCB = intervalID;
+            
+                function SetBallot() {
+                    iterations++;
+                    if(iterations<2){
+                        playerOnTurn = players.getPlayerByTurn(game.currTurn,player.hostId);                       
+                        console.log('Turn Setted for: '+playerOnTurn.nameId);
+                        game.onTurn =1;
+                        console.log('new cicle '+playersInGame.length);
+                        for(var n = 0; n < playersInGame.length; n++)
+                        {
+                            console.log(playersInGame[n].playerId);
+                                io.to(playersInGame[n].playerId).emit('playerTurn', playerOnTurn.playerId); 
+                                if(playersInGame[n].onGame ==false)
+                                {
+                                    console.log("player "+playersInGame[n].playerId+" i outside");
+                                    io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
+                                }
+                        }
+                    }
+                    else{
+                        game.currTurn++;
+                        if(game.currTurn>=playersInGame.length){
+                        game.currTurn = 0;
+                        }
+                            console.log('dice rolled for: '+playerOnTurn.nameId);
+                                var randNum = 0;
+                                while(randNum==0){                            
+                                randNum = Math.floor(Math.random() * 8);
+                                    
+                                }
+                                    playerOnTurn.diceNumber = randNum;
+                                for(var n = 0; n < playersInGame.length; n++)
+                                {                       
+                                    console.log('posicion actual: '+playerOnTurn.posOnBoard+'dado: '+playerOnTurn.diceNumber);
+                                    io.to(playersInGame[n].playerId).emit('moveToSection', playerOnTurn);
+                                    io.to(playersInGame[n].playerId).emit('autoDice', randNum);     
+                                    if(playersInGame[n].onGame ==false)
+                                    {
+                                        console.log("player "+playersInGame[n].playerId+" i outside");
+                                        io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
+                                    }
+                                }                            
+                                    playerOnTurn.posOnBoard = playerOnTurn.posOnBoard + randNum;
+                        console.log('murio al final');                   
+                        clearInterval(game.intervalIdCB);
+                    }
+                }
+            }
+        }
+    }
+
+    minigameDice(socket, io) {
+        return (params) => {
+            var player = players.getPlayer(socket.id);
+            var game = games.getGame(player.hostId); //Gets the game data
+            var playersInGame = players.getPlayers(player.hostId);
+             for(var n = 0; n < playersInGame.length; n++){
+                    io.to(playersInGame[n].playerId).emit('minigamedice', 1);//Sending players old and new sockets                                     
+             }
+        }
+    }
+
+    clearInterval(socket, io) {
+        return (params) => {
+            var player = players.getPlayer(socket.id);     
+            var iterations = 0;
+            var playerOnTurn;    
+            var game = games.getGame(player.hostId); //Gets the game data
+                   playerOnTurn = players.getPlayerByTurn(game.currTurn,player.hostId);  
+            clearInterval(game.intervalIdCB);
+            var playersInGame = players.getPlayers(player.hostId);
+            console.log('interval has been cleared: ');
+            console.log('dice rolled for: '+playerOnTurn.nameId); 
+                        var randNum = 0;
+                        while(randNum==0){                            
+                        randNum = Math.floor(Math.random() * 8);
+                            
+                        }
+                            playerOnTurn.diceNumber = randNum;
+                        for(var n = 0; n < playersInGame.length; n++)
+                        {                       
+                            console.log('posicion actual: '+playerOnTurn.posOnBoard+'dado: '+playerOnTurn.diceNumber);
+                             io.to(playersInGame[n].playerId).emit('moveToSection', playerOnTurn);
+                               io.to(playersInGame[n].playerId).emit('autoDice', randNum);     
+                               if(playersInGame[n].onGame ==false)
+                               {
+                                  console.log("player "+playersInGame[n].playerId+" i outside");
+                                 io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
+                               }
+                        }                            
+                            playerOnTurn.posOnBoard = playerOnTurn.posOnBoard + randNum;
+                    console.log('murio al final');
+                    game.currTurn++;
+                    if(game.currTurn>=playersInGame.length){
+                        game.currTurn = 0;
+                    }
+        }
+    }
+
+    clear(socket) {
+        return (params) => {
+            var player = players.getPlayer(socket.id);        
+            var game = games.getGame(player.hostId); //Gets the game data        
+            clearInterval(game.intervalIdCB);
+        }
+    }
+
+    endMiniGame(socket) {
+        return (params) => {
+            console.log("ending minigame");
+            var player = players.getPlayer(socket.id);        
+            var game = games.getGame(player.hostId); //Gets the game data        
+            game.onTurn = 1;
+        }
+    }
+
 }
 
 module.exports = {logicPlayer}

@@ -1,7 +1,9 @@
 const {moduleGame} = require('../module/moduleGame')
 const {moduleGameCount} = require('../module/moduleGameCount')
+const {modulePlayers} = require('../module/modulePlayer')
 const moduleGame_ = new moduleGame()
 const moduleGameCount_ = new moduleGameCount()
+const modulePlayers_ = new modulePlayers()
 
 class logicGameCount {
 
@@ -9,15 +11,21 @@ class logicGameCount {
 
     createGameCount(socket, io) {
         return (params) => {
+            const player = modulePlayers_.getPlayer(socket.id)
             const number = Math.floor(Math.random() * (35 - 15)) + 15
             const request = moduleGameCount_.addGameCount(params.pin, socket.id, number)
             if (!request) {
                 console.log('no se creo la partida')
             } else {
                 console.log(`partida generada con el socket ${socket.id}, respuesta correcta ${number}`)
-                io.to(socket.id).emit('create-game-count',{
-                    response: number
-                })
+                const players = modulePlayers_.getPlayer(player.hostId)
+                players.forEach(element => {
+                    if(element.onGame == false) {
+                        io.to(element.id).emit('create-game-count',{
+                            response: number
+                        })
+                    }
+                });
                 console.log('se creo la partida')
             }
         }
@@ -32,9 +40,6 @@ class logicGameCount {
                     moduleGameCount_.addGameCount(element.pin, element.id, element.number)
                 }
             });
-            io.emit('join-game-count',{
-                message: 'los jugadores ingresaron a la partida'
-            })
         }
     }
 
