@@ -3,28 +3,29 @@ class moduleGameCount {
         this.gamesCount = []
     }
 
-    addGameCount(pin, hostId, count) {
+    addGameCount(pin, gameId, playerId, number) {
         let gameCount = {
-            pin: pin, 
-            hostId: hostId, 
-            count: count
+            pin: pin,
+            gameId:  gameId,
+            playerId: playerId,
+            number: number
         }
         
         this.gamesCount.push(gameCount)
         return gameCount
     }
 
-    removeGame(hostId){
-        var game = this.getGame(hostId);
+    removeGame(gameId){
+        var game = this.getGame(gameId);
         
         if(game){
-            this.gamesCount = this.gamesCount.filter((game) => game.hostId !== hostId);
+            this.gamesCount = this.gamesCount.filter((game) => game.gameId !== gameId);
         }
         return game;
     }
 
-    getGame(hostId){
-        return this.gamesCount.filter((game) => game.hostId === hostId)[0]
+    getGame(gameId){
+        return this.gamesCount.filter((game) => game.gameId === gameId)[0]
     }
 
 
