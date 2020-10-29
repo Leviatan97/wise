@@ -6,9 +6,6 @@ const path = require('path')
 const {socketPlayer_} = require('../socket/socketPlayer')
 const {socketGameCount_} = require('../socket/socketGameCount')
 const {socketGameMemory_} = require('../socket/socketGameMemory')
-const {logicGameCount_} = require('../logic/logicGameCount')
-const {logicGameMemory_} = require('../logic/logicGameMemory')
-
 
 class server {
     
@@ -30,16 +27,6 @@ class server {
     }
 
     socketSetup() {
-        console.log(logicGameCount_.positionsGameCount(
-            [
-                {id: 1, result: 25},
-                {id: 2, result: 35},
-                {id: 3, result: 33}
-            ],
-            33
-        ))
-        
-        console.log(logicGameMemory_.createArray())
         this.io.on('connection',(socket)=>{
             console.log("Connection " + socket.id);
             this.io.emit('hola');
