@@ -395,4 +395,5 @@ class logicPlayer {
 
 }
 
-module.exports = {logicPlayer}
+const logicPlayer_ = new logicPlayer()
+module.exports = {logicPlayer_}

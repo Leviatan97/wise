@@ -101,4 +101,5 @@ class logicGameCount {
 
 }
 
-module.exports = {logicGameCount}
+const logicGameCount_ = new logicGameCount()
+module.exports = {logicGameCount_}

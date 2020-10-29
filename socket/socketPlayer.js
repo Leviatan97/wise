@@ -1,6 +1,4 @@
-const {logicPlayer} = require('../logic/logicPlayer');
-const socketGameCount = require('./socketGameCount');
-const logicPlayer_ = new logicPlayer()
+const {logicPlayer_} = require('../logic/logicPlayer');
 
 class socketPlayer {
 

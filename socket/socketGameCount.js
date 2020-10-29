@@ -1,5 +1,5 @@
-const {logicGameCount} = require('../logic/logicGameCount')
-const logicGameCount_ = new logicGameCount()
+const {logicGameCount_} = require('../logic/logicGameCount')
+
 
 class socketGameCount {
     constructor() { }
@@ -14,4 +14,5 @@ class socketGameCount {
     
 }
 
-module.exports = {socketGameCount}
+const socketGameCount_ = new socketGameCount()
+module.exports = {socketGameCount_}

@@ -3,14 +3,12 @@ const cors = require('cors')
 const socketIO = require('socket.io')
 const http = require('http')
 const path = require('path')
-const {socketPlayer} = require('../socket/socketPlayer')
-const {socketGameCount} = require('../socket/socketGameCount')
-const socketGameCount_ = new socketGameCount()
-const socketPlayer_ = new socketPlayer()
-const {logicGameCount} = require('../logic/logicGameCount')
-const logicGameCount_ = new logicGameCount()
-const {logicGameMemory_} = require('../logic/logicGameMemory')
+const {socketPlayer_} = require('../socket/socketPlayer')
+const {socketGameCount_} = require('../socket/socketGameCount')
 const {socketGameMemory_} = require('../socket/socketGameMemory')
+const {logicGameCount_} = require('../logic/logicGameCount')
+const {logicGameMemory_} = require('../logic/logicGameMemory')
+
 
 class server {
     
@@ -47,7 +45,7 @@ class server {
             this.io.emit('hola');
             socketPlayer_.socketsPlayer(socket, this.io)
             socketGameCount_.socketsGameCount(socket, this.io) 
-            socketGameCount_.socketsGameCount(socket, this.io) 
+            socketGameMemory_.socketsGameMemory(socket, this.io)
         })
     }
 
