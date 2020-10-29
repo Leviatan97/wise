@@ -1,6 +1,7 @@
 class moduleGameCount {
     constructor() {
         this.gamesCount = []
+        this.resultGameCount = []
     }
 
     addGameCount(pin, gameId, playerId, number) {
@@ -15,20 +16,45 @@ class moduleGameCount {
         return gameCount
     }
 
-    removeGame(gameId){
-        var game = this.getGame(gameId);
+    addResultGameCount(gameId, playerId, response) {
+        let result = {
+            gameId: gameId,
+            playerId: playerId,
+            result: response
+        }
+
+        this.resultGameCount.push(result)
+
+        return result
+    }
+
+    removeResultGameCount(gameId){
+        var game = this.getResultGameCount(gameId);
         
         if(game){
-            this.gamesCount = this.gamesCount.filter((game) => game.gameId !== gameId);
+            this.gamesCount = this.gamesCount.filter((game) => game.pin !== pin);
         }
         return game;
     }
 
-    getGame(gameId){
-        return this.gamesCount.filter((game) => game.gameId === gameId)[0]
+    getResultGameCount(gameId){
+        return this.resultGameCount.filter((game) => game.gameId === gameId)[0]
+    }
+
+    removeGame(pin){
+        var game = this.getGame(pin);
+        
+        if(game){
+            this.gamesCount = this.gamesCount.filter((game) => game.pin !== pin);
+        }
+        return game;
+    }
+
+    getGame(pin){
+        return this.gamesCount.filter((game) => game.pin === pin)[0]
     }
 
 
 }
-
-module.exports = {moduleGameCount}
+const moduleGameCount_ = new moduleGameCount()
+module.exports = {moduleGameCount_}

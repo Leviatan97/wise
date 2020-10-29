@@ -30,5 +30,5 @@ class moduleGame {
         return this.games.filter((game) => game.hostId === hostId)[0]
     }
 }
-
-module.exports = {moduleGame};
+const games = new moduleGame()
+module.exports = {games};

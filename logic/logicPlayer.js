@@ -1,10 +1,8 @@
 const MongoClient = require('mongodb').MongoClient;
 const mongoose = require('mongoose');
 const url = "mongodb://localhost:27017/";
-const {modulePlayers} = require('../module/modulePlayer');
-const players = new modulePlayers()
-const {moduleGame} = require('../module/moduleGame')
-const games = new moduleGame()
+const {players} = require('../module/modulePlayer');
+const {games} = require('../module/moduleGame')
 
 
 class logicPlayer {

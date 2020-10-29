@@ -32,5 +32,5 @@ class modulePlayers {
         return this.players.filter((player) => player.hostId === hostId);
     }
 }
-
-module.exports = {modulePlayers};
+const players = new modulePlayers()
+module.exports = {players};
