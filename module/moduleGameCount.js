@@ -54,6 +54,10 @@ class moduleGameCount {
         return this.gamesCount.filter((game) => game.pin === pin)[0]
     }
 
+    getGames(pin){
+        return this.gamesCount.filter((game) => game.pin === pin)
+    }
+
 
 }
 const moduleGameCount_ = new moduleGameCount()
