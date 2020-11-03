@@ -18,9 +18,10 @@ class logicGameCount {
             } else {
                 console.log(`partida generada con el socket ${socket.id}, respuesta correcta ${number}`)
                 const players = players.getPlayer(player.hostId)
+                console.log(players)
                 players.forEach(element => {
                     if(element.onGame == false) {
-                        io.to(element.id).emit('init-game-count',{
+                        io.to(element.playerId).emit('init-game-count',{
                             response: number
                         })
                     }
@@ -64,9 +65,16 @@ class logicGameCount {
             const response = moduleGameCount_.addResultGameCount(gameCount.gameId, gameCount.playerId, params.result)
 
             if(!response) {
-                console.log('no se creo la partida')
+                console.log('no se guardo el resultado')
             } else {
                 console.log(`resultado guardado con el socket ${socket.id}`)
+                const players = players.getPlayer(player.hostId) 
+                const playersResult = moduleGameCount_.getResultGameCount(gameCount.gameId)
+
+                players.forEach(element => {
+                    io.to(element.playerId).emit('position-game-count', this.positionsGameCount(playersResult, gameCount.result))
+                });
+                
             }
         }
     }
@@ -77,12 +85,12 @@ class logicGameCount {
         players.forEach(element => {
             if(element.result >= result){
                 playerResult = {
-                    playerId: element.id,
+                    playerId: element.playerId,
                     result: element.result - result
                 }
             } else {
                 playerResult = {
-                    playerId: element.id,
+                    playerId: element.playerId,
                     result:  result - element.result
                 }
             }

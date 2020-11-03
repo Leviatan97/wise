@@ -8,8 +8,13 @@ class socketGameMemory {
         return socket.on('create-game-memory',logicGameMemory_.createGameMemory(socket, io))
     }
 
+    resultGameMemory(socket, io) {
+        return socket.on('result-game-memory', logicGameMemory_.resultGameMemory(socket, io))
+    }
+
     socketsGameMemory(socket, io) {
         this.createGameMemory(socket, io)
+        this.resultGameMemory(socket, io)
     }
 }
 

@@ -57,4 +57,4 @@ class moduleGameCount {
 
 }
 const moduleGameCount_ = new moduleGameCount()
-module.exports = {moduleGameCount_}
+module.exports = {moduleGameCount}

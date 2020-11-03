@@ -28,6 +28,32 @@ class moduleGameMemory {
 
         return resultGameMemory
     }
+
+    removeResultGame(gameId){
+        var game = this.getGame(gameId);
+        
+        if(game){
+            this.gamesCount = this.gamesCount.filter((game) => game.gameId !== gameId);
+        }
+        return game;
+    }
+
+    getResultGame(gameId){
+        return this.gamesCount.filter((game) => game.gameId === gameId)[0]
+    }
+
+    removeGame(pin){
+        var game = this.getGame(pin);
+        
+        if(game){
+            this.gamesCount = this.gamesCount.filter((game) => game.pin !== pin);
+        }
+        return game;
+    }
+
+    getGame(pin){
+        return this.gamesCount.filter((game) => game.pin === pin)[0]
+    }
 }
 
 const moduleGameMemory_ = new moduleGameMemory()

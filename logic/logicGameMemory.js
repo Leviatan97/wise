@@ -23,7 +23,8 @@ class logicGameMemory {
                 players.forEach(element => {
                     if(element.onGame == false) {
                         io.to(element.id).emit('init-game-memory',{
-                            response: response
+                            response: response,
+                            board: this.createArray()
                         })
                     }
                 });
@@ -32,6 +33,63 @@ class logicGameMemory {
                 console.log('se creo la partida')
             }
         }
+    }
+
+    resultGameMemory(socket, io) {
+        return (params) => {
+            const player = players.getPlayer(socket.id)
+            const game = games.getGame(player.hostId)
+            const gameMemory = moduleGameMemory_.getGame(game.pin)
+
+            const response = moduleGameMemory_.addResultGameMemory(gameMemory.gameId, gameMemory.playerId, params.result)
+
+            if (!response) {
+                console.log('no se guardo el resultado')
+            } else {
+                console.log(`se guarda el resultado del socket ${socket.id}`)
+                const players = players.getPlayer(player.hostId)
+                const playersResult = moduleGameMemory_.getResultGame(gameMemory.gameId)
+                players.forEach(element => {
+                    io.to(element.playerId).emit('position-game-memory', this.positionGameMemory(playersResult, gameMemory.response))
+                })
+
+            }
+        }
+    }
+
+    positionGameMemory(players, result) {
+        const position = []
+        players.forEach(element => {
+            let player = element.response
+            let points = 0
+            for (let row = 0; row < player.length; row++) {
+                
+                for (let col = 0; col < player.length; col++) {
+                    
+                    if(resultPlayer[row][col] == result[row][col]) {
+                        points += 1
+                    }
+
+                }
+
+            }
+
+            let resultPlayer = {
+                playerId: element.playerId,
+                points: points
+            }
+
+            position.push(resultPlayer)
+        })
+        
+        position.sort(this.descendingOrder)
+
+        return position
+
+    }
+
+    descendingOrder(a, b) {
+        return b.points - a.points
     }
 
     addPlayersGameCount(players, response, game, gameId) {

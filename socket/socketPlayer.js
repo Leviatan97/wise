@@ -82,4 +82,5 @@ class socketPlayer {
     }
 }
 
-module.exports = {socketPlayer}
+const socketPlayer_ = new socketPlayer()
+module.exports = {socketPlayer_}
