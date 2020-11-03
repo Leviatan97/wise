@@ -18,6 +18,7 @@ class logicGameCount {
             } else {
                 console.log(`partida generada con el socket ${socket.id}, respuesta correcta ${number}`)
                 const players_ = players.getPlayers(player.hostId)
+                this.addPlayersGameCount(players_, number, game.pin, gameId)
                 console.log(players_)
                 for (let index = 0; index < players_.length; index++) {
                     
@@ -29,7 +30,7 @@ class logicGameCount {
                     
                 }
 
-                // this.addPlayersGameCount(players, number, game.pin, gameId)
+                
                 
                 this.timerGameCount(io)
                 console.log('se creo la partida')
@@ -38,11 +39,14 @@ class logicGameCount {
     }
 
     addPlayersGameCount(players, number, game, gameId) {
-        players.forEach(element => {
-            if(element.onGame == false) {
-                moduleGameCount_.addGameCount(game.pin, gameId, element.playerId, number)
+        
+        for (let index = 0; index < array.length; index++) {
+            let playerAdd = moduleGameCount_.getGame(game.pin)
+            if(players[index].onGame == false && !playerAdd) {
+                moduleGameCount_.addGameCount(game.pin, gameId, players[index].playerId, number)
             }
-        });
+        }
+        
     }
 
     timerGameCount(io) {
