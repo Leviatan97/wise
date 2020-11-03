@@ -28,17 +28,16 @@ class logicGameCount {
                     }
                     
                 }
-
                 
-                
-                this.timerGameCount(io)
                 console.log('se creo la partida')
+                this.timerGameCount(io)
+                
             }
         }
     }
 
     addPlayersGameCount(players, number, game, gameId) {
-        console.log(players)
+        
         for (let index = 0; index < players.length; index++) {
             let playerAdd = moduleGameCount_.getGame(game)
             if(players[index].onGame != false && players[index].playerId != playerAdd.playerId) {

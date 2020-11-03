@@ -8,13 +8,13 @@ class socketGameCount {
         return socket.on('create-game-count', logicGameCount_.createGameCount(socket, io))
     }
 
-    // resultGameCount(socket, io) {
-    //     return socket.on('result-game-Count', logicGameCount_.positionsGameCount(socket, io))
-    // }
+    resultGameCount(socket, io) {
+        return socket.on('result-game-Count', logicGameCount_.resultGameCount(socket, io))
+    }
 
     socketsGameCount(socket, io) {
         this.createGameCount(socket, io)
-        // this.resultGameCount(socket, io)
+        this.resultGameCount(socket, io)
     }
     
 }
