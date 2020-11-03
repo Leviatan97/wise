@@ -39,10 +39,10 @@ class logicGameCount {
     }
 
     addPlayersGameCount(players, number, game, gameId) {
-        
+        console.log(players)
         for (let index = 0; index < players.length; index++) {
             let playerAdd = moduleGameCount_.getGame(game)
-            if(players[index].onGame == false && playerAdd.playerId != players[index].playerId) {
+            if(players[index].onGame == false) {
                 moduleGameCount_.addGameCount(game, gameId, players[index].playerId, number)
                 console.log("se guardo otro jugador")
             }
