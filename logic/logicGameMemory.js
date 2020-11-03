@@ -97,8 +97,8 @@ class logicGameMemory {
     addPlayersGameCount(players, response, game, gameId) {
 
         for (let index = 0; index < players.length; index++) {
-
-            if(players[index].onGame != false) {
+            let playerAdd = moduleGameMemory_.getGame(game)
+            if(players[index].onGame != false && players[index].playerId != playerAdd.playerId) {
                 moduleGameMemory_.addGameMemory(game, gameId, players[index].playerId, response)
             }
             
