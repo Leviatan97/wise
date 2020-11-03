@@ -40,7 +40,7 @@ class logicGameCount {
 
     addPlayersGameCount(players, number, game, gameId) {
         
-        for (let index = 0; index < array.length; index++) {
+        for (let index = 0; index < players.length; index++) {
             let playerAdd = moduleGameCount_.getGame(game.pin)
             if(players[index].onGame == false && !playerAdd) {
                 moduleGameCount_.addGameCount(game.pin, gameId, players[index].playerId, number)
