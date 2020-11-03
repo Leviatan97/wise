@@ -17,17 +17,19 @@ class logicGameMemory {
             if (!request) {
                 console.log('no se creo la partida')
             } else {
-                console.log(`partida generada con el socket ${socket.id}`)
-                const players = players.getPlayer(player.hostId)
-                this.addPlayersGameCount(players, response, game.pin, gameId)
-                players.forEach(element => {
-                    if(element.onGame == false) {
-                        io.to(element.id).emit('init-game-memory',{
-                            response: response,
-                            board: this.createArray()
+                console.log(`partida generada con el socket ${socket.id}, con la respuesta ${response}`)
+                const players_ = players.getPlayers(player.hostId)
+                this.addPlayersGameCount(players_, response, game.pin, gameId)
+
+                for (let index = 0; index < players_.length; index++) {
+                    
+                    if(players_[index].onGame != false) {
+                        io.to(players_[index].playerId).emit('init-game-memory',{
+                            response: response
                         })
                     }
-                });
+                    
+                }
                 
                 
                 console.log('se creo la partida')
@@ -93,11 +95,15 @@ class logicGameMemory {
     }
 
     addPlayersGameCount(players, response, game, gameId) {
-        players.forEach(element => {
-            if(element.onGame == false) {
-                moduleGameCount_.addGameCount(game.pin, gameId, element.playerId, response)
+
+        for (let index = 0; index < players.length; index++) {
+
+            if(players[index].onGame != false) {
+                moduleGameMemory_.addGameMemory(game, gameId, players[index].playerId, response)
             }
-        });
+            
+        }
+        
     }
 
     createArray() {
