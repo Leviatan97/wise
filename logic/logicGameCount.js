@@ -79,23 +79,26 @@ class logicGameCount {
         }
     }
 
-    positionsGameCount(players = [], result) {
+    positionsGameCount(players, result) {
         let position = []
         let playerResult
-        players.forEach(element => {
-            if(element.result >= result){
+        
+        for (let index = 0; index < players.length; index++) {
+            
+            if(players.result >= result){
                 playerResult = {
-                    playerId: element.playerId,
-                    result: element.result - result
+                    playerId: players.playerId,
+                    result: players.result - result
                 }
             } else {
                 playerResult = {
-                    playerId: element.playerId,
-                    result:  result - element.result
+                    playerId: players.playerId,
+                    result:  result - players.result
                 }
             }
             position.push(playerResult)
-        });
+            
+        }
 
         position.sort(this.ascendingOrder)
 
