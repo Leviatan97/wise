@@ -17,9 +17,9 @@ class logicGameCount {
                 console.log('no se creo la partida')
             } else {
                 console.log(`partida generada con el socket ${socket.id}, respuesta correcta ${number}`)
-                const players = players.getPlayer(player.hostId)
-                console.log(players)
-                players.forEach(element => {
+                const players_ = players.getPlayer(player.hostId)
+                console.log(players_)
+                players_.forEach(element => {
                     if(element.onGame == false) {
                         io.to(element.playerId).emit('init-game-count',{
                             response: number
