@@ -22,7 +22,7 @@ class logicGameCount {
                 this.addPlayersGameCount(players_, number, game.pin, gameId)
                 for (let index = 0; index < players_.length; index++) {
                     
-                    if(players_[index].onGame == false) {
+                    if(players_[index].onGame != false) {
                         io.to(players_[index].playerId).emit('init-game-count',{
                             response: number
                         })
@@ -42,7 +42,7 @@ class logicGameCount {
         console.log(players)
         for (let index = 0; index < players.length; index++) {
             let playerAdd = moduleGameCount_.getGame(game)
-            if(players[index].onGame == false) {
+            if(players[index].onGame != false && players[index].playerId != playerAdd.playerId) {
                 moduleGameCount_.addGameCount(game, gameId, players[index].playerId, number)
                 console.log("se guardo otro jugador")
             }
