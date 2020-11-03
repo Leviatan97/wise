@@ -22,13 +22,11 @@ class logicGameCount {
                 for (let index = 0; index < players_.length; index++) {
                     
                     if(players_[index].onGame != false) {
-                        io.to(players_[index].playerId).emit('init-game-count',{
-                            response: number
-                        })
+                        io.to(players_[index].playerId).emit('init-game-count',number)
                     }
                     
                 }
-                
+
                 console.log('se creo la partida')
                 this.timerGameCount(io)
                 
