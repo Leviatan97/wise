@@ -79,7 +79,7 @@ class logicGameCount {
         }
     }
 
-    positionsGameCount(players, result) {
+    positionsGameCount(players = [], result) {
         let position = []
         let playerResult
         players.forEach(element => {
