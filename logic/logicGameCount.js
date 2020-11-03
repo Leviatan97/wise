@@ -18,7 +18,6 @@ class logicGameCount {
             } else {
                 console.log(`partida generada con el socket ${socket.id}, respuesta correcta ${number}`)
                 const players_ = players.getPlayers(player.hostId)
-                console.log(players_)
                 this.addPlayersGameCount(players_, number, game.pin, gameId)
                 for (let index = 0; index < players_.length; index++) {
                     
