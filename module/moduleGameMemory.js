@@ -33,26 +33,26 @@ class moduleGameMemory {
         var game = this.getGame(gameId);
         
         if(game){
-            this.gamesCount = this.gamesCount.filter((game) => game.gameId !== gameId);
+            this.resultsGamesMemory = this.gamesCount.filter((game) => game.gameId !== gameId);
         }
         return game;
     }
 
     getResultGame(gameId){
-        return this.gamesCount.filter((game) => game.gameId === gameId)[0]
+        return this.resultsGamesMemory.filter((game) => game.gameId === gameId)[0]
     }
 
     removeGame(pin){
         var game = this.getGame(pin);
         
         if(game){
-            this.gamesCount = this.gamesCount.filter((game) => game.pin !== pin);
+            this.gamesMemory = this.gamesCount.filter((game) => game.pin !== pin);
         }
         return game;
     }
 
     getGame(pin){
-        return this.gamesCount.filter((game) => game.pin === pin)[0]
+        return this.gamesMemory.filter((game) => game.pin === pin)[0]
     }
 }
 
