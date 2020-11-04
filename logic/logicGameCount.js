@@ -60,7 +60,6 @@ class logicGameCount {
 
     resultGameCount(socket, io) {
         return (params)=> {
-            console.log(params)
             const player = players.getPlayer(socket.id)
             const game = games.getGame(player.hostId)
             const gameCount = moduleGameCount_.getGame(game.pin)
@@ -70,9 +69,7 @@ class logicGameCount {
             if(!response) {
                 console.log('no se guardo el resultado')
             } else {
-
-                console.log(params)
-                // console.log(`resultado guardado con el socket ${socket.id}`)
+                console.log(`resultado guardado ${params.result} con el socket ${socket.id}`)
                 // const players = players.getPlayer(player.hostId) 
                 // const playersResult = moduleGameCount_.getResultGameCount(gameCount.gameId)
 
