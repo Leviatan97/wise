@@ -38,7 +38,7 @@ class moduleGameCount {
     }
 
     getResultGameCount(gameId){
-        return this.resultGameCount.filter((game) => game.gameId === gameId)[0]
+        return this.resultGameCount.filter((game) => game.gameId === gameId)
     }
 
     removeGame(pin){
