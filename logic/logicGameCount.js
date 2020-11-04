@@ -106,7 +106,39 @@ class logicGameCount {
 
         position.sort(this.ascendingOrder)
 
-        return position
+        return this.positionNumberGamecount(position)
+    }
+
+    positionNumberGamecount(players) {
+        let positions = []
+        let position
+        for (let index = 0; index < players.length; index++) {
+            
+            if (index != 0) {
+                if(players[index-1].result == players[index].result) {
+                    position = {
+                        playerId: players[index].playerId,
+                        result: players[index].result,
+                        position: index - 1
+                    }
+                } else {
+                    position = {
+                        playerId: players[index].playerId,
+                        result: players[index].result,
+                        position: index
+                    }
+                }
+            }else {
+                position = {
+                    playerId: players[index].playerId,
+                    result: players[index].result,
+                    position: 1
+                }
+            }
+            positions.push(position)
+        }
+
+        return positions
     }
 
     
