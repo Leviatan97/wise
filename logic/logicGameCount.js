@@ -69,13 +69,15 @@ class logicGameCount {
             if(!response) {
                 console.log('no se guardo el resultado')
             } else {
-                console.log(`resultado guardado con el socket ${socket.id}`)
-                const players = players.getPlayer(player.hostId) 
-                const playersResult = moduleGameCount_.getResultGameCount(gameCount.gameId)
 
-                players.forEach(element => {
-                    io.to(element.playerId).emit('position-game-count', this.positionsGameCount(playersResult, gameCount.result))
-                });
+                console.log(params)
+                // console.log(`resultado guardado con el socket ${socket.id}`)
+                // const players = players.getPlayer(player.hostId) 
+                // const playersResult = moduleGameCount_.getResultGameCount(gameCount.gameId)
+
+                // players.forEach(element => {
+                //     io.to(element.playerId).emit('position-game-count', this.positionsGameCount(playersResult, gameCount.result))
+                // });
                 
             }
         }
