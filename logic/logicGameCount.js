@@ -75,7 +75,7 @@ class logicGameCount {
                 
                 for (let index = 0; index < players_.length; index++) {
                     
-                    io.to(element.playerId).emit('position-game-count', this.positionsGameCount(playersResult, gameCount.result))
+                    io.to(players_[index].playerId).emit('position-game-count', this.positionsGameCount(playersResult, gameCount.result))
 
                 }
                   
