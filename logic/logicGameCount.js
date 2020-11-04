@@ -72,11 +72,13 @@ class logicGameCount {
                 console.log(`resultado guardado ${params.result} con el socket ${socket.id}`)
                 const players_ = players.getPlayers(player.hostId) 
                 const playersResult = moduleGameCount_.getResultGameCount(gameCount.gameId)
-                console.log(playersResult)
-                // players.forEach(element => {
-                //     io.to(element.playerId).emit('position-game-count', this.positionsGameCount(playersResult, gameCount.result))
-                // });
                 
+                for (let index = 0; index < players_.length; index++) {
+                    
+                    io.to(element.playerId).emit('position-game-count', this.positionsGameCount(playersResult, gameCount.result))
+
+                }
+                  
             }
         }
     }
