@@ -72,7 +72,7 @@ class logicGameCount {
                 console.log(`resultado guardado ${params.result} con el socket ${socket.id}`)
                 const players_ = players.getPlayers(player.hostId) 
                 const playersResult = moduleGameCount_.getResultGameCount(gameCount.gameId)
-                console.log(players_)
+                console.log(playersResult)
                 // players.forEach(element => {
                 //     io.to(element.playerId).emit('position-game-count', this.positionsGameCount(playersResult, gameCount.result))
                 // });
@@ -89,13 +89,13 @@ class logicGameCount {
             
             if(players.result >= result){
                 playerResult = {
-                    playerId: players.playerId,
-                    result: players.result - result
+                    playerId: players[index].playerId,
+                    result: players[index].result - result
                 }
             } else {
                 playerResult = {
-                    playerId: players.playerId,
-                    result:  result - players.result
+                    playerId: players[index].playerId,
+                    result:  result - players[index].result
                 }
             }
             position.push(playerResult)
