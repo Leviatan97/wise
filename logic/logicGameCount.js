@@ -89,7 +89,7 @@ class logicGameCount {
         
         for (let index = 0; index < players.length; index++) {
             
-            if(players.result >= result){
+            if(players[index].result >= result){
                 playerResult = {
                     playerId: players[index].playerId,
                     result: players[index].result - result

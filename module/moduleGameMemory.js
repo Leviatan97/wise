@@ -39,7 +39,7 @@ class moduleGameMemory {
     }
 
     getResultGame(gameId){
-        return this.resultsGamesMemory.filter((game) => game.gameId === gameId)[0]
+        return this.resultsGamesMemory.filter((game) => game.gameId === gameId)
     }
 
     removeGame(pin){

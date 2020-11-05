@@ -49,11 +49,13 @@ class logicGameMemory {
                 console.log('no se guardo el resultado')
             } else {
                 console.log(`se guarda el resultado del socket ${socket.id}`)
-                const players = players.getPlayer(player.hostId)
+                const players_ = players.getPlayers(player.hostId)
                 const playersResult = moduleGameMemory_.getResultGame(gameMemory.gameId)
-                players.forEach(element => {
-                    io.to(element.playerId).emit('position-game-memory', this.positionGameMemory(playersResult, gameMemory.response))
-                })
+
+                
+                // players.forEach(element => {
+                //     io.to(element.playerId).emit('position-game-memory', this.positionGameMemory(playersResult, gameMemory.response))
+                // })
 
             }
         }
