@@ -53,6 +53,7 @@ class logicGameCount {
             let time = 10;
             for (let index = time; index >= 0; index--) {
                 setTimeout(()  => {
+                    console.log(index)
                     if(index == 0) {
                         io.emit('game-over-count',index) 
                     }
