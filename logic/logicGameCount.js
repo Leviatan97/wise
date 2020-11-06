@@ -63,6 +63,7 @@ class logicGameCount {
             const player = players.getPlayer(socket.id)
             const game = games.getGame(player.hostId)
             const gameCount = moduleGameCount_.getGame(game.pin)
+            const gamesCount = moduleGameCount_.getGames(game.pin)
             
             const response = moduleGameCount_.addResultGameCount(gameCount.gameId, gameCount.playerId, params.result)
 
@@ -72,12 +73,15 @@ class logicGameCount {
                 console.log(`resultado guardado ${params.result} con el socket ${socket.id}`)
                 const players_ = players.getPlayers(player.hostId) 
                 const playersResult = moduleGameCount_.getResultGameCount(gameCount.gameId)
-                
-                for (let index = 0; index < players_.length; index++) {
-                    
-                    io.to(players_[index].playerId).emit('position-game-count', this.positionsGameCount(playersResult, gameCount.number))
 
+                if(playersResult.length == gamesCount.length) {
+                    for (let index = 0; index < players_.length; index++) {
+                    
+                        io.to(players_[index].playerId).emit('position-game-count', this.positionsGameCount(playersResult, gameCount.number))
+    
+                    }
                 }
+                
                   
             }
         }
