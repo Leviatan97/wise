@@ -12,24 +12,27 @@ class logicGameCount {
             const game = games.getGame(player.hostId)
             const number = Math.floor(Math.random() * (35 - 15)) + 15
             const gameId = Math.floor(Math.random() * (9000 - 1000)) + 1000
-            const request = moduleGameCount_.addGameCount(game.pin, gameId, player.playerId, number)
-            if (!request) {
-                console.log('no se creo la partida')
-            } else {
-                console.log(`partida generada con el socket ${socket.id}, respuesta correcta ${number}`)
-                const players_ = players.getPlayers(player.hostId)
-                this.addPlayersGameCount(players_, number, game.pin, gameId)
-                for (let index = 0; index < players_.length; index++) {
-                    
-                    if(players_[index].onGame != false) {
-                        io.to(players_[index].playerId).emit('init-game-count',{response:number})
+            const gameCount = moduleGameCount_.getGame(game.pin)
+            if(!gameCount) {
+                const request = moduleGameCount_.addGameCount(game.pin, gameId, player.playerId, number)
+                if (!request) {
+                    console.log('no se creo la partida')
+                } else {
+                    console.log(`partida generada con el socket ${socket.id}, respuesta correcta ${number}`)
+                    const players_ = players.getPlayers(player.hostId)
+                    this.addPlayersGameCount(players_, number, game.pin, gameId)
+                    for (let index = 0; index < players_.length; index++) {
+                        
+                        if(players_[index].onGame != false) {
+                            io.to(players_[index].playerId).emit('init-game-count',{response:number})
+                        }
+                        
                     }
+
+                    console.log('se creo la partida')
+                    this.timerGameCount(io)
                     
                 }
-
-                console.log('se creo la partida')
-                this.timerGameCount(io)
-                
             }
         }
     }
