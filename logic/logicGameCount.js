@@ -50,19 +50,19 @@ class logicGameCount {
 
     timerGameCount(io, players) {
         let time = 20;
-        
-            setInterval(() => {
-                if(time >= 0) {
-                    for (let index = 0; index < players.length; index++) {
-                        
-                        if(players[index].onGame != false) {
-                            io.to(players[index].playerId).emit('timer-game-count',time)
-                        }
-                        
+            
+        setInterval(() => {
+            if(time >= 0) {
+                for (let index = 0; index < players.length; index++) {
+                    
+                    if(players[index].onGame != false) {
+                        io.to(players[index].playerId).emit('timer-game-count',time)
                     }
-                    time--;
+                    
                 }
-            }, 1000);
+                time--;
+            }
+        }, 1000);
         
     }
 

@@ -6,7 +6,6 @@ const path = require('path')
 const {socketPlayer_} = require('../socket/socketPlayer')
 const {socketGameCount_} = require('../socket/socketGameCount')
 const {socketGameMemory_} = require('../socket/socketGameMemory')
-const {logicGameCount_} = require('../logic/logicGameCount')
 
 class server {
     
@@ -28,7 +27,6 @@ class server {
     }
 
     socketSetup() {
-        logicGameCount_.timerGameCount()
         this.io.on('connection',(socket)=>{
             console.log("Connection " + socket.id);
             this.io.emit('hola');
