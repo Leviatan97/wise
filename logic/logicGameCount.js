@@ -30,7 +30,7 @@ class logicGameCount {
                     }
 
                     console.log('se creo la partida')
-                    this.timerGameCount(io)
+                    this.timerGameCount(io, players_)
                     
                 }
             }
@@ -48,18 +48,22 @@ class logicGameCount {
         
     }
 
-    timerGameCount(io) {
-        return ()=>{
-            let time = 10;
-            for (let index = time; index >= 0; index--) {
-                setTimeout(()  => {
-                    console.log(index)
-                    if(index == 0) {
-                        io.emit('game-over-count',index) 
+    timerGameCount(io, players) {
+        let time = 20;
+        
+            setInterval(() => {
+                if(time >= 0) {
+                    for (let index = 0; index < players_.length; index++) {
+                        
+                        if(players[index].onGame != false) {
+                            io.to(players[index].playerId).emit('timer-game-count',time)
+                        }
+                        
                     }
-                },1000)
-            }
-        }
+                    time--;
+                }
+            }, 1000);
+        
     }
 
     resultGameCount(socket, io) {
