@@ -128,6 +128,7 @@ class logicGameCount {
             
             if (index != 0) {
                 if(players[index-1].result == players[index].result) {
+                    console.log(players[index].result)
                     position = {
                         playerId: players[index].playerId,
                         result: players[index].result,
