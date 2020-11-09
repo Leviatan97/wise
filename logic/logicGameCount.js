@@ -87,9 +87,10 @@ class logicGameCount {
                         io.to(players_[index].playerId).emit('position-game-count', this.positionsGameCount(playersResult, gameCount.number))
     
                     }
+                    moduleGameCount_.removeGame(game.pin);
                 }
                 
-                moduleGameCount_.removeGame(game.pin);
+                
             }
         }
     }
