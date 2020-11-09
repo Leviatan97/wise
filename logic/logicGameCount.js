@@ -124,6 +124,7 @@ class logicGameCount {
     positionNumberGamecount(players) {
         let positions = []
         let position
+        console.log(players)
         for (let index = 0; index < players.length; index++) {
             
             if (index != 0) {
