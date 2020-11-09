@@ -127,7 +127,7 @@ class logicGameCount {
         console.log(players)
         for (let index = 0; index < players.length; index++) {
             
-            if (index != 0) {
+            if (index > 0) {
                 if(players[index-1].result == players[index].result) {
                     console.log(players[index].result)
                     position = {
