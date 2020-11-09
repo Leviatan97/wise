@@ -72,7 +72,7 @@ class logicGameCount {
             const game = games.getGame(player.hostId)
             const gameCount = moduleGameCount_.getGame(game.pin)
             const gamesCount = moduleGameCount_.getGames(game.pin)
-            console.log(gamesCount)
+            console.log(gameCount)
             // const response = moduleGameCount_.addResultGameCount(gameCount.gameId, gameCount.playerId, params.result)
 
             // if(!response) {
