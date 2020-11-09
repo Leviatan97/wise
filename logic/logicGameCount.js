@@ -73,7 +73,7 @@ class logicGameCount {
             const gameCount = moduleGameCount_.getGame(game.pin)
             const gamesCount = moduleGameCount_.getGames(game.pin)
 
-            const response = moduleGameCount_.addResultGameCount(gameCount.gameId, gameCount.playerId, params.result)
+            const response = moduleGameCount_.addResultGameCount(gameCount.gameId, socket.id, params.result)
             console.log(response)
             // if(!response) {
             //     console.log('no se guardo el resultado')
