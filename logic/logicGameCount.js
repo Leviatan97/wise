@@ -72,26 +72,26 @@ class logicGameCount {
             const game = games.getGame(player.hostId)
             const gameCount = moduleGameCount_.getGame(game.pin)
             const gamesCount = moduleGameCount_.getGames(game.pin)
-            
-            const response = moduleGameCount_.addResultGameCount(gameCount.gameId, gameCount.playerId, params.result)
+            console.log(gamesCount)
+            // const response = moduleGameCount_.addResultGameCount(gameCount.gameId, gameCount.playerId, params.result)
 
-            if(!response) {
-                console.log('no se guardo el resultado')
-            } else {
-                console.log(`resultado guardado ${params.result} con el socket ${socket.id}`)
-                const players_ = players.getPlayers(player.hostId) 
-                const playersResult = moduleGameCount_.getResultGameCount(gameCount.gameId)
+            // if(!response) {
+            //     console.log('no se guardo el resultado')
+            // } else {
+            //     console.log(`resultado guardado ${params.result} con el socket ${socket.id}`)
+            //     const players_ = players.getPlayers(player.hostId) 
+            //     const playersResult = moduleGameCount_.getResultGameCount(gameCount.gameId)
 
-                if(playersResult.length == gamesCount.length) {
-                    for (let index = 0; index < players_.length; index++) {
+            //     if(playersResult.length == gamesCount.length) {
+            //         for (let index = 0; index < players_.length; index++) {
                     
-                        io.to(players_[index].playerId).emit('position-game-count', this.positionsGameCount(playersResult, gameCount.number))
+            //             io.to(players_[index].playerId).emit('position-game-count', this.positionsGameCount(playersResult, gameCount.number))
     
-                    }
-                }
+            //         }
+            //     }
                 
-                moduleGameCount_.removeGame(game.pin);
-            }
+            //     moduleGameCount_.removeGame(game.pin);
+            // }
         }
     }
 
