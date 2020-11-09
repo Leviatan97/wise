@@ -139,7 +139,7 @@ class logicGameCount {
                     position = {
                         playerId: players[index].playerId,
                         result: players[index].result,
-                        position: index
+                        position: index + 1
                     }
                 }
             }else {
