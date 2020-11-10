@@ -1,6 +1,6 @@
 const {players} = require('../module/modulePlayer');
 const {games} = require('../module/moduleGame')
-const {moduleGameCount_} = require('../module/moduleGameCount')
+const {moduleGameCount_} = require('../module/moduleGameCount');
 
 class logicGameCount {
 
@@ -88,6 +88,7 @@ class logicGameCount {
     
                     }
                     moduleGameCount_.removeGame(game.pin);
+                    moduleGameCount_.removeResultGameCount(gameCount.gameId);
                 }
                 
                 

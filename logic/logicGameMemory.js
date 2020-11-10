@@ -10,29 +10,32 @@ class logicGameMemory {
             const player = players.getPlayer(socket.id)
             const game = games.getGame(player.hostId)
             const gameId = Math.floor(Math.random() * (9000 - 1000)) + 1000
+            const gameMemory = moduleGameMemory_.getGame(game.pin)
             const response = this.createArray()
 
-            const request = moduleGameMemory_.addGameMemory(game.pin, gameId, player.playerId, response)
+            if(!gameMemory) {
 
-            if (!request) {
-                console.log('no se creo la partida')
-            } else {
-                console.log(`partida generada con el socket ${socket.id}, con la respuesta ${response}`)
-                const players_ = players.getPlayers(player.hostId)
-                this.addPlayersGameCount(players_, response, game.pin, gameId)
+                const request = moduleGameMemory_.addGameMemory(game.pin, gameId, player.playerId, response)
 
-                for (let index = 0; index < players_.length; index++) {
-                    
-                    if(players_[index].onGame != false) {
-                        io.to(players_[index].playerId).emit('init-game-memory',{
-                            response: response
-                        })
+                if (!request) {
+                    console.log('no se creo la partida')
+                } else {
+                    console.log(`partida generada con el socket ${socket.id}, con la respuesta ${response}`)
+                    const players_ = players.getPlayers(player.hostId)
+                    this.addPlayersGameCount(players_, response, game.pin, gameId)
+
+                    for (let index = 0; index < players_.length; index++) {
+                        
+                        if(players_[index].onGame != false) {
+                            io.to(players_[index].playerId).emit('init-game-memory',response)
+                        }
+                        
                     }
                     
+                    
+                    console.log('se creo la partida')
                 }
-                
-                
-                console.log('se creo la partida')
+
             }
         }
     }
@@ -42,8 +45,9 @@ class logicGameMemory {
             const player = players.getPlayer(socket.id)
             const game = games.getGame(player.hostId)
             const gameMemory = moduleGameMemory_.getGame(game.pin)
+            const gamesMemory = moduleGameMemory_.getGames(game.pin)
 
-            const response = moduleGameMemory_.addResultGameMemory(gameMemory.gameId, gameMemory.playerId, params.result)
+            const response = moduleGameMemory_.addResultGameMemory(gameMemory.gameId, player.playerId, params.result)
 
             if (!response) {
                 console.log('no se guardo el resultado')
@@ -52,10 +56,13 @@ class logicGameMemory {
                 const players_ = players.getPlayers(player.hostId)
                 const playersResult = moduleGameMemory_.getResultGame(gameMemory.gameId)
 
-                
-                // players.forEach(element => {
-                //     io.to(element.playerId).emit('position-game-memory', this.positionGameMemory(playersResult, gameMemory.response))
-                // })
+                if(gamesMemory.length == playersResult.length) {
+                    for (let index = 0; index < array.length; index++) {
+                        io.to(players_[index].playerId).emit('position-game-memory', this.positionGameMemory(playersResult, gameMemory.response))
+                    }
+                    moduleGameMemory_.removeGame(game.pin)
+                    moduleGameMemory_.removeResultGame(gameMemory.gameId)
+                }
 
             }
         }
@@ -113,7 +120,7 @@ class logicGameMemory {
         let result = []
         let number
 
-        for (let row = 0; row < 3; row++) {
+        for (let row = 0; row < 4; row++) {
             result[row] = []
             for (let col = 0; col < 3; col++) {
                 
@@ -123,13 +130,13 @@ class logicGameMemory {
             
         }
 
-        for (let row = 0; row < 3; row++) {
+        for (let row = 0; row < 4; row++) {
             for (let col = 0; col < 3; col++) {
                 
-                number = Math.floor(Math.random() * (10 - 1)) + 1
+                number = Math.floor(Math.random() * (13 - 1)) + 1
                 
                 while(this.checkArray(result, number) == false ) {
-                    number = Math.floor(Math.random() * (10 - 1)) + 1
+                    number = Math.floor(Math.random() * (13 - 1)) + 1
                 }
                 
                 result[row][col] = number
@@ -143,7 +150,7 @@ class logicGameMemory {
 
     checkArray(arr, num) {
 
-        for (let row = 0; row < 3; row++) {
+        for (let row = 0; row < 4; row++) {
             
             for (let col = 0; col < 3; col++) {
                 

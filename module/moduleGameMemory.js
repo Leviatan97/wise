@@ -54,6 +54,10 @@ class moduleGameMemory {
     getGame(pin){
         return this.gamesMemory.filter((game) => game.pin === pin)[0]
     }
+    
+    getGames(pin){
+        return this.gamesMemory.filter((game) => game.pin === pin)
+    }
 }
 
 const moduleGameMemory_ = new moduleGameMemory()
