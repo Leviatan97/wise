@@ -34,10 +34,50 @@ class logicGameMemory {
                     
                     
                     console.log('se creo la partida')
+                    this.timerViewGameMemory(io, players_)
                 }
 
             }
         }
+    }
+
+    timerViewGameMemory(io, players) {
+        let time = 15;
+            
+        setInterval(() => {
+            if(time >= 0) {
+                for (let index = 0; index < players.length; index++) {
+                    
+                    if(players[index].onGame != false) {
+                        io.to(players[index].playerId).emit('timer-view-game',time)
+                    }
+                    
+                }
+                if(time <= 0) {
+                    this.timerGameMemory(io, player)
+                }
+                time--;
+            }
+        }, 1000);
+        
+    }
+
+    timerGameMemory(io, players) {
+        let time = 45;
+            
+        setInterval(() => {
+            if(time >= 0) {
+                for (let index = 0; index < players.length; index++) {
+                    
+                    if(players[index].onGame != false) {
+                        io.to(players[index].playerId).emit('timer-game-memory',time)
+                    }
+                    
+                }
+                time--;
+            }
+        }, 1000);
+        
     }
 
     resultGameMemory(socket, io) {

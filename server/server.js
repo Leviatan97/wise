@@ -6,6 +6,8 @@ const path = require('path')
 const {socketPlayer_} = require('../socket/socketPlayer')
 const {socketGameCount_} = require('../socket/socketGameCount')
 const {socketGameMemory_} = require('../socket/socketGameMemory')
+const { socketGameHideaway_ } = require('../socket/socketGameHideaway')
+
 
 class server {
     
@@ -33,6 +35,7 @@ class server {
             socketPlayer_.socketsPlayer(socket, this.io)
             socketGameCount_.socketsGameCount(socket, this.io) 
             socketGameMemory_.socketsGameMemory(socket, this.io)
+            socketGameHideaway_.socketsGameHideaway(socket, this.io)
         })
     }
 
