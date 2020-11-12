@@ -69,7 +69,7 @@ class logicGameHideaway {
 
     addPlayersGameHideAway(players, pin, gameId, operation, result, tower, castle, pit, rock, turn) {
         for (let index = 0; index < players.length; index++) {
-            let playerAdd = moduleGameHideaway_.getGame(game)
+            let playerAdd = moduleGameHideaway_.getGame(pin)
             if(players[index].onGame != false && players[index].playerId != playerAdd.playerId) {
                 moduleGameHideaway_.addGameHideaway(
                     pin, 
