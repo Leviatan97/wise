@@ -54,7 +54,7 @@ class logicGameMemory {
                     
                 }
                 if(time <= 0) {
-                    this.timerGameMemory(io, player)
+                    this.timerGameMemory(io, players)
                 }
                 time--;
             }
