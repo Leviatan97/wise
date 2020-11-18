@@ -7,6 +7,7 @@ const {socketPlayer_} = require('../socket/socketPlayer')
 const {socketGameCount_} = require('../socket/socketGameCount')
 const {socketGameMemory_} = require('../socket/socketGameMemory')
 const { socketGameHideaway_ } = require('../socket/socketGameHideaway')
+const { socketGameCard_ } = require('../socket/socketGameCard')
 
 
 class server {
@@ -36,6 +37,7 @@ class server {
             socketGameCount_.socketsGameCount(socket, this.io) 
             socketGameMemory_.socketsGameMemory(socket, this.io)
             socketGameHideaway_.socketsGameHideaway(socket, this.io)
+            socketGameCard_.socketsGameCard(socket, this.io)
         })
     }
 
