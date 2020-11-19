@@ -97,7 +97,7 @@ class logicGameMemory {
                 const playersResult = moduleGameMemory_.getResultGame(gameMemory.gameId)
 
                 if(gamesMemory.length == playersResult.length) {
-                    for (let index = 0; index < array.length; index++) {
+                    for (let index = 0; index < players_.length; index++) {
                         io.to(players_[index].playerId).emit('position-game-memory', this.positionGameMemory(playersResult, gameMemory.response))
                     }
                     moduleGameMemory_.removeGame(game.pin)
