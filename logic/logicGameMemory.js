@@ -95,7 +95,7 @@ class logicGameMemory {
                 console.log(`se guarda el resultado del socket ${socket.id}`)
                 const players_ = players.getPlayers(player.hostId)
                 const playersResult = moduleGameMemory_.getResultGame(gameMemory.gameId)
-
+                console.log(playersResult)
                 if(gamesMemory.length == playersResult.length) {
                     for (let index = 0; index < players_.length; index++) {
                         io.to(players_[index].playerId).emit('position-game-memory', this.positionGameMemory(playersResult, gameMemory.response))
@@ -111,26 +111,27 @@ class logicGameMemory {
     positionGameMemory(players, result) {
         const position = []
         players.forEach(element => {
-            let player = element.response
-            let points = 0
-            for (let row = 0; row < player.length; row++) {
+            console.log(element)
+            // let player = element.response
+            // let points = 0
+            // for (let row = 0; row < players.length; row++) {
                 
-                for (let col = 0; col < player.length; col++) {
+            //     for (let col = 0; col < players.length; col++) {
                     
-                    if(resultPlayer[row][col] == result[row][col]) {
-                        points += 1
-                    }
+            //         if(resultPlayer[row][col] == result[row][col]) {
+            //             points += 1
+            //         }
 
-                }
+            //     }
 
-            }
+            // }
 
-            let resultPlayer = {
-                playerId: element.playerId,
-                points: points
-            }
+            // let resultPlayer = {
+            //     playerId: element.playerId,
+            //     points: points
+            // }
 
-            position.push(resultPlayer)
+            // position.push(resultPlayer)
         })
         
         position.sort(this.descendingOrder)
