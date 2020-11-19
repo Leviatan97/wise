@@ -24,7 +24,7 @@ class moduleGameMemory {
             response: response
         }
 
-        this.resultsGameMemory.push(resultGameMemory)
+        this.resultsGamesMemory.push(resultGameMemory)
 
         return resultGameMemory
     }
@@ -33,7 +33,7 @@ class moduleGameMemory {
         var game = this.getGame(gameId);
         
         if(game){
-            this.resultsGamesMemory = this.gamesCount.filter((game) => game.gameId !== gameId);
+            this.resultsGamesMemory = this.resultsGamesMemory.filter((game) => game.gameId !== gameId);
         }
         return game;
     }
@@ -46,7 +46,7 @@ class moduleGameMemory {
         var game = this.getGame(pin);
         
         if(game){
-            this.gamesMemory = this.gamesCount.filter((game) => game.pin !== pin);
+            this.gamesMemory = this.gamesMemory.filter((game) => game.pin !== pin);
         }
         return game;
     }
