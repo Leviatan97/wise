@@ -125,7 +125,7 @@ class logicGameMemory {
                 
                 for (let col = 0; col < players.length; col++) {
                     
-                    if(resultPlayer[row][col] == result[row][col]) {
+                    if(player[row][col] == result[row][col]) {
                         points += 1
                     }
 
