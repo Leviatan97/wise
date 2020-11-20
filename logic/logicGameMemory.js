@@ -138,12 +138,13 @@ class logicGameMemory {
                 points: points
             }
 
-            console.log(resultPlayer)
-            // position.push(resultPlayer)
+            
+            position.push(resultPlayer)
         })
         
         position.sort(this.descendingOrder)
 
+        console.log(position)
         return position
 
     }
