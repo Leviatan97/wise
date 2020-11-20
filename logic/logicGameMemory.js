@@ -110,31 +110,39 @@ class logicGameMemory {
     positionGameMemory(players, result) {
         const position = []
         players.forEach(element => {
-            
-            let playerRes = [
-                [
-                    element.response[0].position1,
-                    element.response[0].position2,
-                    element.response[0].position3,
-                ],
-                [
-                    element.response[1].position1,
-                    element.response[1].position2,
-                    element.response[1].position3,
-                ],
-                [
-                    element.response[2].position1,
-                    element.response[2].position2,
-                    element.response[2].position3,
-                ],
-                [
-                    element.response[3].position1,
-                    element.response[3].position2,
-                    element.response[3].position3,
-                ],
-            ]
+            let player = []
+            for(let row = 0; row < 4; row++) {
+                let player_ = [
+                    element.response[row].position1,
+                    element.response[row].position2,
+                    element.response[row].position3
+                ]
+                player.push(player_)
+            }
+            // let playerRes = [
+            //     [
+            //         parseInt(element.response[0].position1),
+            //         parseInt(element.response[0].position2),
+            //         element.response[0].position3,
+            //     ],
+            //     [
+            //         element.response[1].position1,
+            //         element.response[1].position2,
+            //         element.response[1].position3,
+            //     ],
+            //     [
+            //         element.response[2].position1,
+            //         element.response[2].position2,
+            //         element.response[2].position3,
+            //     ],
+            //     [
+            //         element.response[3].position1,
+            //         element.response[3].position2,
+            //         element.response[3].position3,
+            //     ],
+            // ]
 
-            console.log(playerRes)
+            console.log(player)
             // let points = 0
             // for (let row = 0; row < players.length; row++) {
                 
