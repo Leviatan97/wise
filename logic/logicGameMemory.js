@@ -111,8 +111,30 @@ class logicGameMemory {
         const position = []
         players.forEach(element => {
             
-            let player = element.response[0].position1
-            console.log(player)
+            let playerRes = [
+                [
+                    element.response[0].position1,
+                    element.response[0].position2,
+                    element.response[0].position3,
+                ],
+                [
+                    element.response[1].position1,
+                    element.response[1].position2,
+                    element.response[1].position3,
+                ],
+                [
+                    element.response[2].position1,
+                    element.response[2].position2,
+                    element.response[2].position3,
+                ],
+                [
+                    element.response[3].position1,
+                    element.response[3].position2,
+                    element.response[3].position3,
+                ],
+            ]
+
+            console.log(playerRes)
             // let points = 0
             // for (let row = 0; row < players.length; row++) {
                 
