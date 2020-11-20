@@ -86,7 +86,7 @@ class logicGameMemory {
             const game = games.getGame(player.hostId)
             const gameMemory = moduleGameMemory_.getGame(game.pin)
             const gamesMemory = moduleGameMemory_.getGames(game.pin)
-
+            console.log(params)
             const response = moduleGameMemory_.addResultGameMemory(gameMemory.gameId, player.playerId, params.result)
 
             if (!response) {
