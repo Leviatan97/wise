@@ -113,54 +113,32 @@ class logicGameMemory {
             let player = []
             for(let row = 0; row < 4; row++) {
                 let player_ = [
-                    element.response[row].position1,
-                    element.response[row].position2,
-                    element.response[row].position3
+                    parseInt(element.response[row].position1),
+                    parseInt(element.response[row].position2),
+                    parseInt(element.response[row].position3)
                 ]
                 player.push(player_)
             }
-            // let playerRes = [
-            //     [
-            //         parseInt(element.response[0].position1),
-            //         parseInt(element.response[0].position2),
-            //         element.response[0].position3,
-            //     ],
-            //     [
-            //         element.response[1].position1,
-            //         element.response[1].position2,
-            //         element.response[1].position3,
-            //     ],
-            //     [
-            //         element.response[2].position1,
-            //         element.response[2].position2,
-            //         element.response[2].position3,
-            //     ],
-            //     [
-            //         element.response[3].position1,
-            //         element.response[3].position2,
-            //         element.response[3].position3,
-            //     ],
-            // ]
 
-            console.log(player)
-            // let points = 0
-            // for (let row = 0; row < players.length; row++) {
+            let points = 0
+            for (let row = 0; row < players.length; row++) {
                 
-            //     for (let col = 0; col < players.length; col++) {
+                for (let col = 0; col < players.length; col++) {
                     
-            //         if(resultPlayer[row][col] == result[row][col]) {
-            //             points += 1
-            //         }
+                    if(resultPlayer[row][col] == result[row][col]) {
+                        points += 1
+                    }
 
-            //     }
+                }
 
-            // }
+            }
 
-            // let resultPlayer = {
-            //     playerId: element.playerId,
-            //     points: points
-            // }
+            let resultPlayer = {
+                playerId: element.playerId,
+                points: points
+            }
 
+            console.log(resultPlayer)
             // position.push(resultPlayer)
         })
         
