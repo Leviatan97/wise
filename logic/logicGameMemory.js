@@ -158,20 +158,20 @@ class logicGameMemory {
                 if(players[index-1].points == players[index].points) {
                     position = {
                         playerId: players[index].playerId,
-                        result: players[index].points,
+                        points: players[index].points,
                         position: index
                     }
                 } else {
                     position = {
                         playerId: players[index].playerId,
-                        result: players[index].points,
+                        points: players[index].points,
                         position: index + 1
                     }
                 }
             }else {
                 position = {
                     playerId: players[index].playerId,
-                    result: players[index].points,
+                    points: players[index].points,
                     position: 1
                 }
             }
