@@ -144,9 +144,41 @@ class logicGameMemory {
         
         position.sort(this.descendingOrder)
 
-        console.log(position)
-        return position
+        
+        return this.postionNumberGameMemory(position)
 
+    }
+
+    postionNumberGameMemory(players) {
+        let positions = []
+        let position
+        
+        for (let index = 0; index < players.length; index++) {
+            if (index > 0) {
+                if(players[index-1].points == players[index].points) {
+                    position = {
+                        playerId: players[index].playerId,
+                        result: players[index].points,
+                        position: index
+                    }
+                } else {
+                    position = {
+                        playerId: players[index].playerId,
+                        result: players[index].points,
+                        position: index + 1
+                    }
+                }
+            }else {
+                position = {
+                    playerId: players[index].playerId,
+                    result: players[index].points,
+                    position: 1
+                }
+            }
+            positions.push(position)
+        }
+
+        return positions
     }
 
     descendingOrder(a, b) {
