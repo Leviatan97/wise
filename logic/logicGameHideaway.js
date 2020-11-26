@@ -18,17 +18,21 @@ class logicGameHideaway {
                 const request = moduleGameHideaway_.addGameHideaway(
                     game.pin, 
                     gameId, 
-                    player.playerId, 
-                    operation.operation, 
-                    operation.result, 
-                    values.tower, 
-                    values.castle, 
-                    values.pit, 
-                    values.rock, 
-                    1
+                    player.playerId,
+                    true
                 )
 
-                if(!request) {
+                const round = moduleGameHideaway_.addRoundGameHideaway(
+                    gameId,
+                    operation.operation,
+                    operation.result,
+                    values.tower,
+                    values.castle,
+                    values.pit,
+                    values.rock
+                )
+
+                if(!request && !round) {
                     console.log('no se creo la partida')
                 } else {
                     console.log(`partida generada por el socket ${socket.id}, la operación es ${operation.operation} = ${operation.result}`)
@@ -37,13 +41,7 @@ class logicGameHideaway {
                         players_,
                         game.pin,
                         gameId,
-                        operation.operation,
-                        operation.result,
-                        values.tower,
-                        values.castle,
-                        values.pit,
-                        values.rock,
-                        1
+                        true
                     )
 
                     for (let index = 0; index < players_.length; index++) {
@@ -61,27 +59,157 @@ class logicGameHideaway {
                     }
 
                     console.log('Se creo la partida')
+                    this.timerGameHideaway(io, players_)
+                }
+            }
+        }
+    }
+
+    timerGameHideaway(io, players) {
+        let time = 20;
+            
+        setInterval(() => {
+            if(time >= 0) {
+                for (let index = 0; index < players.length; index++) {
+                    
+                    if(players[index].onGame != false) {
+                        io.to(players[index].playerId).emit('timer-game-hideaway',time)
+                    }
+                    
+                }
+                time--;
+            }
+        }, 1000);
+        
+    }
+
+    resultGameHideaway(socket, io) {
+        return (params) => {
+            const player = players.getPlayer(socket.id)
+            const game = games.getGame(player.hostId)
+            const gameHideaway = moduleGameHideaway_.getGame(game.pin)
+            const gamesHideaway = moduleGameHideaway_.getGames(game.pin)
+            let condition = 0;
+
+            const response = moduleGameHideaway_.addResultGameHideaway(game.gameId, player.playerId, params.result)
+            if(!response) {
+                console.log('no se guardo el resultado')
+            } else {
+                console.log(`se guardo el resultado ${params.result} del socket ${socket.id}`)
+                const players_ = players.getPlayers(player.hostId)
+                const playersResult = moduleGameHideaway_.getResultGameHideaway(gameHideaway.gameId)
+
+                if(gamesHideaway.length == playersResult.length) {
+                    for(let i = 0; i < gamesHideaway.length_; i++) {
+                        if(gamesHideaway[i].condition == false) {
+                            condition ++;
+                        }
+                    }
+
+                    if(condition >= gamesHideaway.length_-1) {
+                        for (let index = 0; index < players_.length; index++) {
+                            io.to(players_[index].playerId).emit('position-game-hideaway', {
+                                res: "entro a posiciones"
+                            })
+                        }
+                    } else {
+                        for (let index = 0; index < players_.length; index++) {
+                            io.to(players_[index].playerId).emit('response-game-hideaway', this.responseGameHideaway(gameHideaway.gameId))
+                        }
+                        this.timerNewRoundGame(io, players_)
+                    }
+                    
+                }
+            }
+        }
+    }
+
+    timerNewRoundGame(io, players) {
+        let time = 2;
+            
+        setInterval(() => {
+            if(time >= 0) {
+                for (let index = 0; index < players.length; index++) {
+                    
+                    if(players[index].onGame != false) {
+                        io.to(players[index].playerId).emit('timer-round-hideaway',time)
+                    }
+                    
+                }
+                time--;
+            }
+        }, 1000);
+        
+    }
+
+    responseGameHideaway(gameId) {
+        const gameRound = moduleGameHideaway_.getRoundGameHideaway(gameId)
+        const resultsPlayers = moduleGameHideaway_.getResultGameHideaway(gameId)
+        resultsPlayers.forEach(element => {
+            if(element.result == gameRound[0].result) {
+                moduleGameHideaway_.addConditionGameHideaway(element.gameId, element.playererId, true);
+            } else {
+                moduleGameHideaway_.editPlayerCondition(element.gameId, element.playererId);
+            }
+        });
+        moduleGameHideaway_.removeRoundGameHideaway()
+        return gameRound[0].result;
+    }
+
+    newRoundGameHideaway(socket, io) {
+        return () => {
+            const player = players.getPlayer(socket.id)
+            const game = games.getGame(player.hostId)
+            const gameHideaway = moduleGameHideaway_.getGame(game.pin)
+            const operation = this.generateOperation()
+            const values = this.generateOtherValues(operation.result)
+            const rounds = moduleGameHideaway_.getRoundGameHideaway()
+            
+            if(!rounds) {
+                const round = moduleGameHideaway_.addRoundGameHideaway(
+                    gameHideaway.gameId,
+                    operation.operation,
+                    operation.result,
+                    values.tower,
+                    values.castle,
+                    values.pit,
+                    values.rock,
+                )
+
+                if(!round) {
+                    console.log("no se creo la partida");
+                } else {
+                    console.log(`se creo la siguiente ronda con el socket ${socket.id}`)
+                    const players_ = players.getPlayers(player.hostId)
+
+                    for (let index = 0; index < players_.length; index++) {
+                        
+                        if(players_[index].onGame != false) {
+                            io.to(players_[index].playerId).emit('init-game-hide-away',{
+                                operation: operation.operation,
+                                tower: values.tower,
+                                castle: values.castle,
+                                pit: values.pit,
+                                rock: values.rock
+                            })
+                        }
+                        
+                    }
 
                 }
             }
         }
     }
 
-    addPlayersGameHideAway(players, pin, gameId, operation, result, tower, castle, pit, rock, turn) {
+    addPlayersGameHideAway(players, pin, gameId, condition) {
         for (let index = 0; index < players.length; index++) {
             let playerAdd = moduleGameHideaway_.getGame(pin)
-            if(players[index].onGame != false && players[index].playerId != playerAdd.playerId) {
+            if(players[index].onGame != false && players[index].playerId != playerAdd.playerId && condition != false) {
                 moduleGameHideaway_.addGameHideaway(
                     pin, 
                     gameId, 
-                    players[index].playerId, 
-                    operation, 
-                    result, 
-                    tower, 
-                    castle, 
-                    pit, 
-                    rock, 
-                    turn
+                    players[index].playerId,
+                    condition
                 )
             }
             

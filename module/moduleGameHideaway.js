@@ -2,42 +2,67 @@ class moduleGameHideaway {
     constructor() {
         this.gamesHideaway = []
         this.resultGameHideaway = []
+        this.rounds = []
+        this.conditionGameHideaway = []
     }
 
     addGameHideaway(
         pin, 
         gameId, 
-        playerId, 
-        operations, 
-        result, 
-        tower, 
-        castle, 
-        pit, 
-        rock,
-        turn
+        playerId,
+        condition
     ) {
         let gameHideaway = {
             pin: pin,
             gameId:  gameId,
             playerId: playerId,
-            operations: operations,
-            result: result,
-            tower: tower,
-            castle: castle,
-            pit: pit,
-            rock: rock,
-            turn: turn
+            condition: condition
         }
         
         this.gamesHideaway.push(gameHideaway)
         return gameHideaway
     }
 
-    addResultGameHideaway(gameId, playerId, response) {
+    addRoundGameHideaway(
+        gameId,
+        operations, 
+        result, 
+        tower, 
+        castle, 
+        pit, 
+        rock
+    ) {
+
+        let round = {
+            gameId: gameId,
+            operations: operations,
+            result: result,
+            tower: tower,
+            castle: castle,
+            pit: pit,
+            rock: rock
+        }
+        this.rounds.push(round)
+        return round
+    
+    }
+
+    addConditionGameHideaway(gameId, playerId, condition) {
+        let points = {
+            gameId: gameId,
+            playerId: playerId,
+            condition: condition
+        }
+
+        this.conditionGameHideaway.push(points)
+        return points
+    }
+
+    addResultGameHideaway(gameId, playerId, result) {
         let result = {
             gameId: gameId,
             playerId: playerId,
-            result: response
+            result: result
         }
 
         this.resultGameHideaway.push(result)
@@ -54,8 +79,29 @@ class moduleGameHideaway {
         return game;
     }
 
+    editPlayerCondition(gameId, playerId) {
+        this.gamesHideaway.forEach(element => {
+            if(element.gameId == gameId && element.playerId == playerId) {
+                element.condition == false
+            }
+        });
+    }
+
     getResultGameHideaway(gameId){
         return this.resultGameHideaway.filter((game) => game.gameId === gameId)
+    }
+
+    getRoundGameHideaway(gameId){
+        return this.rounds.filter((game) => game.gameId === gameId)
+    }
+
+    removeRoundGameHideaway(gameId){
+        var game = this.getResultGameHideaway(gameId);
+        
+        if(game){
+            this.resultGameHideaway = this.resultGameHideaway.filter((game) => game.pin !== pin);
+        }
+        return game;
     }
 
     removeGame(pin){
