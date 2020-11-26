@@ -90,7 +90,7 @@ class logicGameHideaway {
             const gameHideaway = moduleGameHideaway_.getGame(game.pin)
             const gamesHideaway = moduleGameHideaway_.getGames(game.pin)
             let condition = 0;
-
+            console.log(gamesHideaway)
             const response = moduleGameHideaway_.addResultGameHideaway(game.gameId, player.playerId, params.result)
             if(!response) {
                 console.log('no se guardo el resultado')
