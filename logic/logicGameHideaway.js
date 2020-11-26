@@ -98,7 +98,7 @@ class logicGameHideaway {
                 console.log(`se guardo el resultado ${params.result} del socket ${socket.id}`)
                 const players_ = players.getPlayers(player.hostId)
                 const playersResult = moduleGameHideaway_.getResultGameHideaway(gameHideaway.gameId)
-
+                console.log(playersResult)
                 if(gamesHideaway.length == playersResult.length) {
                     for(let i = 0; i < gamesHideaway.length_; i++) {
                         if(gamesHideaway[i].condition == false) {
