@@ -59,15 +59,15 @@ class moduleGameHideaway {
     }
 
     addResultGameHideaway(gameId, playerId, result) {
-        let result = {
+        let results = {
             gameId: gameId,
             playerId: playerId,
             result: result
         }
 
-        this.resultGameHideaway.push(result)
+        this.resultGameHideaway.push(results)
 
-        return result
+        return results
     }
 
     removeResultGameHideaway(gameId){
