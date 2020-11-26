@@ -100,7 +100,7 @@ class logicGameHideaway {
                 const playersResult = moduleGameHideaway_.getResultGameHideaway(game.gameId)
                 console.log(playersResult)
                 if(gamesHideaway.length == playersResult.length) {
-                    console.log("Entro al if :v")
+                    let res  = this.responseGameHideaway(gameHideaway.gameId)
                     for(let i = 0; i < gamesHideaway.length_; i++) {
                         if(gamesHideaway[i].condition == false) {
                             condition ++;
@@ -110,12 +110,13 @@ class logicGameHideaway {
                     if(condition >= gamesHideaway.length_-1) {
                         for (let index = 0; index < players_.length; index++) {
                             io.to(players_[index].playerId).emit('position-game-hideaway', {
-                                res: "entro a posiciones"
+                                position: "entro a posiciones",
+                                res: res
                             })
                         }
                     } else {
                         for (let index = 0; index < players_.length; index++) {
-                            io.to(players_[index].playerId).emit('response-game-hideaway', this.responseGameHideaway(gameHideaway.gameId))
+                            io.to(players_[index].playerId).emit('response-game-hideaway', res)
                         }
                         this.timerNewRoundGame(io, players_)
                     }
