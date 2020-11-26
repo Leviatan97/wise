@@ -99,7 +99,7 @@ class moduleGameHideaway {
         var game = this.getResultGameHideaway(gameId);
         
         if(game){
-            this.resultGameHideaway = this.resultGameHideaway.filter((game) => game.pin !== pin);
+            this.resultGameHideaway = this.resultGameHideaway.filter((game) => game.gameId !== gameId);
         }
         return game;
     }
