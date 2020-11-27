@@ -23,11 +23,34 @@ class logicGameMemory {
                     console.log(`partida generada con el socket ${socket.id}, con la respuesta ${response}`)
                     const players_ = players.getPlayers(player.hostId)
                     this.addPlayersGameCount(players_, response, game.pin, gameId)
+                    let position = [
+                        {
+                            position1: response[0][0],
+                            position2: response[0][1],
+                            position3: response[0][2] 
+                        },
+                        {
+                            position1: response[1][0],
+                            position2: response[1][1],
+                            position3: response[1][2] 
+                        },
+                        {
+                            position1: response[2][0],
+                            position2: response[2][1],
+                            position3: response[2][2] 
+                        },
+                        {
+                            position1: response[3][0],
+                            position2: response[3][1],
+                            position3: response[3][2] 
+                        }
+                    ]
+                    
 
                     for (let index = 0; index < players_.length; index++) {
                         
                         if(players_[index].onGame != false) {
-                            io.to(players_[index].playerId).emit('init-game-memory',response)
+                            io.to(players_[index].playerId).emit('init-game-memory',position)
                         }
                         
                     }
