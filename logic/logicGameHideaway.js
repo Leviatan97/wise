@@ -90,17 +90,17 @@ class logicGameHideaway {
             const gameHideaway = moduleGameHideaway_.getGame(game.pin)
             let gamesHideaway = moduleGameHideaway_.getGames(game.pin)
             let condition = 0;
-            console.log(gameHideaway)
-            const response = moduleGameHideaway_.addResultGameHideaway(game.gameId, player.playerId, params.result)
+            console.log(gameHideaway.gameId)
+            const response = moduleGameHideaway_.addResultGameHideaway(gameHideaway.gameId, player.playerId, params.result)
             if(!response) {
                 console.log('no se guardo el resultado')
             } else {
                 console.log(`se guardo el resultado ${params.result} del socket ${socket.id}`)
                 const players_ = players.getPlayers(player.hostId)
-                const playersResult = moduleGameHideaway_.getResultGameHideaway(game.gameId)
+                const playersResult = moduleGameHideaway_.getResultGameHideaway(gameHideaway.gameId)
                 
                 if(gamesHideaway.length == playersResult.length) {
-                    let res  = this.responseGameHideaway(game.gameId)
+                    let res  = this.responseGameHideaway(gameHideaway.gameId)
                     gamesHideaway = moduleGameHideaway_.getGames(game.pin)
                     for(let i = 0; i < gamesHideaway.length_; i++) {
                         if(gamesHideaway[i].condition == false) {
