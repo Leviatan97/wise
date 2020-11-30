@@ -102,6 +102,7 @@ class logicGameHideaway {
                 if(gamesHideaway.length == playersResult.length) {
                     let res  = this.responseGameHideaway(gameHideaway.gameId)
                     gamesHideaway = moduleGameHideaway_.getGames(game.pin)
+                    console.log(gamesHideaway)
                     for(let i = 0; i < gamesHideaway.length_; i++) {
                         if(gamesHideaway[i].condition == false) {
                             condition ++;
@@ -148,7 +149,7 @@ class logicGameHideaway {
     responseGameHideaway(gameId) {
         const gameRound = moduleGameHideaway_.getRoundGameHideaway(gameId)
         const resultsPlayers = moduleGameHideaway_.getResultGameHideaway(gameId)
-        console.log(gameRound)
+        
         resultsPlayers.forEach(element => {
             if(element.result == gameRound[0].result) {
                 moduleGameHideaway_.addConditionGameHideaway(element.gameId, element.playererId, true);
