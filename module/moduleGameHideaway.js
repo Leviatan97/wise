@@ -83,6 +83,7 @@ class moduleGameHideaway {
         this.gamesHideaway.forEach(element => {
             console.log(element)
             if(element.gameId == gameId && element.playerId == playerId) {
+                console.log(element.condition)
                 element.condition = false
             }
         });
