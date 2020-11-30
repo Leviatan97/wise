@@ -149,7 +149,7 @@ class logicGameHideaway {
     responseGameHideaway(gameId) {
         const gameRound = moduleGameHideaway_.getRoundGameHideaway(gameId)
         const resultsPlayers = moduleGameHideaway_.getResultGameHideaway(gameId)
-        
+        console.log(resultsPlayers)
         resultsPlayers.forEach(element => {
             console.log("Element de results") 
             console.log(element)
