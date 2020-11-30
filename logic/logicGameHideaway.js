@@ -88,7 +88,7 @@ class logicGameHideaway {
             const player = players.getPlayer(socket.id)
             const game = games.getGame(player.hostId)
             const gameHideaway = moduleGameHideaway_.getGame(game.pin)
-            const gamesHideaway = moduleGameHideaway_.getGames(game.pin)
+            let gamesHideaway = moduleGameHideaway_.getGames(game.pin)
             let condition = 0;
             
             const response = moduleGameHideaway_.addResultGameHideaway(game.gameId, player.playerId, params.result)
