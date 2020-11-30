@@ -152,9 +152,9 @@ class logicGameHideaway {
         
         resultsPlayers.forEach(element => {
             if(element.result == gameRound[0].result) {
-                moduleGameHideaway_.addConditionGameHideaway(element.gameId, element.playererId, true);
+                moduleGameHideaway_.addConditionGameHideaway(element.gameId, element.playerId, true);
             } else {
-                moduleGameHideaway_.editPlayerCondition(element.gameId, element.playererId);
+                moduleGameHideaway_.editPlayerCondition(element.gameId, element.playerId);
             }
         });
         moduleGameHideaway_.removeRoundGameHideaway()
