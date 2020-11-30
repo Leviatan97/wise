@@ -82,7 +82,7 @@ class moduleGameHideaway {
     editPlayerCondition(gameId, playerId) {
         this.gamesHideaway.forEach(element => {
             if(element.gameId == gameId && element.playerId == playerId) {
-                element.condition == false
+                element.condition = false
             }
         });
     }
