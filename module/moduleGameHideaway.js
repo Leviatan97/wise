@@ -81,6 +81,7 @@ class moduleGameHideaway {
 
     editPlayerCondition(gameId, playerId) {
         this.gamesHideaway.forEach(element => {
+            console.log(element)
             if(element.gameId == gameId && element.playerId == playerId) {
                 element.condition = false
             }
