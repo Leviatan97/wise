@@ -102,13 +102,13 @@ class logicGameHideaway {
                 if(gamesHideaway.length == playersResult.length) {
                     let res  = this.responseGameHideaway(gameHideaway.gameId)
                     let games = moduleGameHideaway_.getGames(game.pin)
-                    console.log(games)
+                    
                     for(let i = 0; i < games.length_; i++) {
                         if(games[i].condition == false) {
                             condition ++;
                         }
                     }
-
+                    console.log(condition)
                     if(condition >= games.length_-1) {
                         for (let index = 0; index < players_.length; index++) {
                             io.to(players_[index].playerId).emit('position-game-hideaway', {
