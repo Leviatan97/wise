@@ -98,19 +98,18 @@ class logicGameHideaway {
                 console.log(`se guardo el resultado ${params.result} del socket ${socket.id}`)
                 const players_ = players.getPlayers(player.hostId)
                 const playersResult = moduleGameHideaway_.getResultGameHideaway(gameHideaway.gameId)
-                console.log(players_)
                 if(gamesHideaway.length == playersResult.length) {
                     let res  = this.responseGameHideaway(gameHideaway.gameId)
                     let games = moduleGameHideaway_.getGames(game.pin)
                     
                     games.forEach(element => {
-                        console.log(element)
                         if(element.condition == false) {
                             condition++;
                         }
                     });
-                    console.log(games.length)
+                    
                     if(condition >= games.length_-1) {
+                        console.log("Entro al if sapo perro")
                         for (let index = 0; index < players_.length; index++) {
                             io.to(players_[index].playerId).emit('position-game-hideaway', {
                                 position: "entro a posiciones",
