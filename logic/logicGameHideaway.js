@@ -109,8 +109,7 @@ class logicGameHideaway {
                             condition++;
                         }
                     });
-                    
-                    console.log(condition)
+                    console.log(games.length)
                     if(condition >= games.length_-1) {
                         for (let index = 0; index < players_.length; index++) {
                             io.to(players_[index].playerId).emit('position-game-hideaway', {
