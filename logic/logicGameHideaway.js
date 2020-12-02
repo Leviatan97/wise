@@ -104,10 +104,11 @@ class logicGameHideaway {
                     let games = moduleGameHideaway_.getGames(game.pin)
                     
                     for(let i = 0; i < games.length_; i++) {
-                        console.log(games[i])
+                        
                         if(games[i].condition == false) {
                             condition ++;
                         }
+                        console.log(games[i])
                     }
                     console.log(condition)
                     if(condition >= games.length_-1) {
