@@ -108,7 +108,9 @@ class logicGameHideaway {
                         }
                     });
                     
-                    if(condition >= games.length_-1) {
+                    let comparation = games.length - 1 
+
+                    if(condition >= comparation) {
                         console.log("Entro al if sapo perro")
                         for (let index = 0; index < players_.length; index++) {
                             io.to(players_[index].playerId).emit('position-game-hideaway', {
