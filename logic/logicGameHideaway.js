@@ -202,7 +202,7 @@ class logicGameHideaway {
                         }
                         
                     }
-
+                    this.timerGameHideaway(io, players_)
                 }
             }
         }
