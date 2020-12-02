@@ -105,14 +105,11 @@ class logicGameHideaway {
                     
                     games.forEach(element => {
                         console.log(element)
-                    });
-                    for(let i = 0; i < games.length_; i++) {
-                        
-                        if(games[i].condition == false) {
-                            condition ++;
+                        if(element.condition == false) {
+                            condition++;
                         }
-                        console.log(games[i])
-                    }
+                    });
+                    
                     console.log(condition)
                     if(condition >= games.length_-1) {
                         for (let index = 0; index < players_.length; index++) {
