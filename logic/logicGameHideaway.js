@@ -111,10 +111,10 @@ class logicGameHideaway {
                     let comparation = games.length - 1 
 
                     if(condition >= comparation) {
-                        this.positionGameHideaway(gameHideaway.gameId, players_)
+                        
                         for (let index = 0; index < players_.length; index++) {
                             io.to(players_[index].playerId).emit('position-game-hideaway', {
-                                position: "entro a posiciones",
+                                position: this.positionGameHideaway(gameHideaway.gameId, players_),
                                 res: res
                             })
                         }
@@ -399,7 +399,46 @@ class logicGameHideaway {
             }
             position.push(player)
         });
-        console.log(position)
+
+        position.sort(this.descendingOrder)
+
+        return this.postionNumberGameHideaway(position)
+    }
+
+    postionNumberGameHideaway(players) {
+        let positions = []
+        let position
+        
+        for (let index = 0; index < players.length; index++) {
+            if (index > 0) {
+                if(players[index-1].points == players[index].points) {
+                    position = {
+                        playerId: players[index].playerId,
+                        points: players[index].points,
+                        position: index
+                    }
+                } else {
+                    position = {
+                        playerId: players[index].playerId,
+                        points: players[index].points,
+                        position: index + 1
+                    }
+                }
+            }else {
+                position = {
+                    playerId: players[index].playerId,
+                    points: players[index].points,
+                    position: 1
+                }
+            }
+            positions.push(position)
+        }
+
+        return positions
+    }
+
+    descendingOrder(a, b) {
+        return b.points - a.points
     }
     
 }
