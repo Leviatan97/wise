@@ -88,6 +88,10 @@ class moduleGameHideaway {
         });
     }
 
+    getConditionGameHideaway(gameId, playerId){
+        return this.conditionGameHideaway.filter((game) => game.gameId === gameId && game.playerId === playerId)
+    }
+
     getResultGameHideaway(gameId){
         return this.resultGameHideaway.filter((game) => game.gameId === gameId)
     }

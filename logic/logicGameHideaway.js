@@ -111,7 +111,7 @@ class logicGameHideaway {
                     let comparation = games.length - 1 
 
                     if(condition >= comparation) {
-                        console.log("Entro al if sapo perro")
+                        this.positionGameHideaway(gameHideaway.gameId, players_)
                         for (let index = 0; index < players_.length; index++) {
                             io.to(players_[index].playerId).emit('position-game-hideaway', {
                                 position: "entro a posiciones",
@@ -381,6 +381,14 @@ class logicGameHideaway {
         }
 
         return res
+    }
+
+    positionGameHideaway(gameId, players) {
+        let points = [];
+        players.forEach(element => {
+            let point = moduleGameHideaway_.getConditionGameHideaway(gameId, element.playerId)
+            console.log(point)
+        });
     }
     
 }
