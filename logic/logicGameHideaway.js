@@ -384,11 +384,22 @@ class logicGameHideaway {
     }
 
     positionGameHideaway(gameId, players) {
-        let points = [];
+        let position = [];
         players.forEach(element => {
-            let point = moduleGameHideaway_.getConditionGameHideaway(gameId, element.playerId)
-            console.log(point)
+            let condition = moduleGameHideaway_.getConditionGameHideaway(gameId, element.playerId)
+            let pointsCondition = 0;
+            condition.forEach(element2=>{
+                if(element2.condition == true) {
+                    pointsCondition++;
+                }
+            })
+            let player = {
+                playerId: element.playerId,
+                points: pointsCondition
+            }
+            position.push(player)
         });
+        console.log(position)
     }
     
 }
