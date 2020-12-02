@@ -103,6 +103,9 @@ class logicGameHideaway {
                     let res  = this.responseGameHideaway(gameHideaway.gameId)
                     let games = moduleGameHideaway_.getGames(game.pin)
                     
+                    games.forEach(element => {
+                        console.log(element)
+                    });
                     for(let i = 0; i < games.length_; i++) {
                         
                         if(games[i].condition == false) {
