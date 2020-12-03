@@ -101,11 +101,18 @@ class logicGameCard {
                     
                     console.log(condition)
                     console.log(points)
-                    if(condition == true || points == true) {
+                    if(condition == true) {
+
                         
                         for (let index = 0; index < players_.length; index++) {
                             io.to(players_[index].playerId).emit('position-game-card', this.positionGameCard(games))
                         }
+                    } else if(points == true) {
+
+                        for (let index = 0; index < players_.length; index++) {
+                            io.to(players_[index].playerId).emit('position-game-card', this.positionGameCard(games))
+                        }
+                        
                     } else {
                         for (let index = 0; index < players_.length; index++) {
                             io.to(players_[index].playerId).emit('response-game-card', this.positionNumberGameCard(res))
