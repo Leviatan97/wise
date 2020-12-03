@@ -1,5 +1,6 @@
 const { moduleGameCard_ } = require("../module/moduleGameCard")
 const { players } = require("../module/modulePlayer")
+const { games } = require("../module/moduleGame")
 
 class logicGameCard {
     constructor() {}
