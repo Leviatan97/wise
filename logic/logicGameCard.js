@@ -118,7 +118,7 @@ class logicGameCard {
     }
 
     responseGameCard(gameId) {
-        const resultsPlayers = moduleGameCard_.getResultGameHideaway(gameId)
+        const resultsPlayers = moduleGameCard_.getResultGameCard(gameId)
         let positionRound = []
         resultsPlayers.forEach(element => {
             let resultPlayer = {
