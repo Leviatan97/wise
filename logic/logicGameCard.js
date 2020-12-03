@@ -99,7 +99,8 @@ class logicGameCard {
                         }
                     });
                     
-
+                    console.log(condition)
+                    console.log(points)
                     if(condition == true || points == true) {
                         
                         for (let index = 0; index < players_.length; index++) {
