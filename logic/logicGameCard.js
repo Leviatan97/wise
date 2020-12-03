@@ -30,7 +30,7 @@ class logicGameCard {
                     for (let index = 0; index < players_.length; index++) {
                         
                         if(players_[index].onGame != false) {
-                            let playerAdd = moduleGameHideaway_.getGame(game.pin)
+                            let playerAdd = moduleGameCard_.getGame(game.pin)
                             if (players[index].playerId != playerAdd.playerId) {
                                 let cardsPlayer = this.generateCards()
                                 moduleGameCard_.addGameCard(game.pin, gameId, players[index].playerId, cardsPlayer, 1)
