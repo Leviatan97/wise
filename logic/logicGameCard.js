@@ -31,7 +31,7 @@ class logicGameCard {
                         
                         if(players_[index].onGame != false) {
                             let playerAdd = moduleGameCard_.getGame(game.pin)
-                            if (players[index].playerId != playerAdd.playerId) {
+                            if (players_[index].playerId != playerAdd.playerId) {
                                 let cardsPlayer = this.generateCards()
                                 moduleGameCard_.addGameCard(game.pin, gameId, players[index].playerId, cardsPlayer, 1)
                                 io.to(players_[index].playerId).emit('init-game-card', cardsPlayer)
