@@ -36,6 +36,16 @@ class modulePlayers {
         }
         return player;
     }
+
+    removePlayers(hostId){
+        var player = this.getPlayers(hostId);
+        
+        if(player){
+            this.players = this.players.filter((player) => player.playerId !== playerId);
+        }
+        return player;
+    }
+
     getPlayer(playerId){
         return this.players.filter((player) => player.playerId === playerId)[0]
     }

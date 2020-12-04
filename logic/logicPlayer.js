@@ -390,6 +390,8 @@ class logicPlayer {
         return () => {
             let player = players.getPlayer(socket.id)
             let game = games.getGame(player.hostId);
+
+            console.log("llego a player Reached End Of The Game")
             if(!game) {
                 console.log("ya se elimino el juego")
             }else {
@@ -415,7 +417,7 @@ class logicPlayer {
             let player = players.getPlayer(socket.id)
             let positionPlayer = players.addPlayerPos(player.hostId, player.playerId, params)
             let posPlayers = players.getPlayersPos(player.hostId)
-
+            console.log("llego a final pos")
             if(!positionPlayer) {
                 console.log("no se guardo la posicion en el tablero")
             } else {
@@ -426,6 +428,7 @@ class logicPlayer {
                         io.to(players_[index].playerId).emit('final-results', this.positionsGame(posPlayers))
                         
                     }
+
                 }
             }
             
