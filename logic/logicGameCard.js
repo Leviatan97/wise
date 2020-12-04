@@ -60,6 +60,7 @@ class logicGameCard {
                     }
                     
                 }
+                console.log("segundos cartas "+ time)
                 time--;
             }
         }, 1000);
@@ -227,6 +228,7 @@ class logicGameCard {
                     }
                     
                 }
+                console.log("segundos ronda cartas"+ time)
                 if(time == 0) {
                     this.timerGameCard(io, players)
                 }
