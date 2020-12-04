@@ -202,10 +202,24 @@ class logicGameHideaway {
                         }
                         
                     }
-                    this.timerGameHideaway(io, players_)
+                    this.timerNewRound(io, players_)
                 }
             }
         }
+    }
+
+    timerNewRound(io, players) {
+        let time = 5;
+            
+        setInterval(() => {
+            if(time >= 0) {
+                if(time == 0) {
+                    this.timerGameHideaway(io, players)
+                }
+                time--;
+            }
+        }, 1000);
+        
     }
 
     addPlayersGameHideAway(players, pin, gameId, condition) {
