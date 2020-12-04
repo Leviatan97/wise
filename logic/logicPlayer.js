@@ -397,17 +397,14 @@ class logicPlayer {
             }else {
 
                 // let gameRemove = games.removeGame(player.hostId)
-                if(!gameRemove) {
-                    console.log("no se elimino el juego")
-                } else {
-                    let players_ = players.getPlayers(player.hostId)
+                let players_ = players.getPlayers(player.hostId)
 
-                    for (let index = 0; index < players_.length; index++) {
-                        
-                        io.to(players_[index].playerId).emit('game-is-over', 1)
+                for (let index = 0; index < players_.length; index++) {
+                    
+                    io.to(players_[index].playerId).emit('game-is-over', 1)
 
-                    }
                 }
+               
             }
         }
     }
