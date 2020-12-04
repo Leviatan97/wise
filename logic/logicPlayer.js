@@ -396,7 +396,7 @@ class logicPlayer {
                 console.log("ya se elimino el juego")
             }else {
 
-                let gameRemove = games.removeGame(player.hostId)
+                // let gameRemove = games.removeGame(player.hostId)
                 if(!gameRemove) {
                     console.log("no se elimino el juego")
                 } else {
