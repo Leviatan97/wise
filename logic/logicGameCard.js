@@ -87,6 +87,7 @@ class logicGameCard {
                 if(gamesCard.length == playersResult.length) {
                     let res  = this.responseGameCard(gameCard.gameId)
                     this.addPointsRoundCard(res, gameCard.gameId)
+                    moduleGameCard_.addRoundGameCard(gameCard.gameId)
                     let games = moduleGameCard_.getGames(game.pin)
                     
 
@@ -210,8 +211,6 @@ class logicGameCard {
                 }
             }
 
-            moduleGameCard_.addRoundGameCard(gameId, positions[index].playerId)
-            
         }
     }
 
