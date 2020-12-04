@@ -443,7 +443,7 @@ class logicPlayer {
                 pos: players[index].pos
             }
 
-            position.push(playerResult)
+            position.push(playerPos)
             
         }
 
