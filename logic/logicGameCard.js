@@ -3,7 +3,9 @@ const { players } = require("../module/modulePlayer")
 const { games } = require("../module/moduleGame")
 
 class logicGameCard {
-    constructor() {}
+    constructor() {
+        this.rounds = 0;
+    }
 
     createGameCard(socket, io) {
         return () => {
@@ -116,7 +118,8 @@ class logicGameCard {
                             io.to(players_[index].playerId).emit('response-game-card', this.positionNumberGameCard(res))
                         }
                         moduleGameCard_.removeResultGameCard(gameCard.gameId)
-                        moduleGameCard_.addRoundGameCard(gameCard.gameId)
+                        console.log(this.rounds)
+                        this.rounds += 1;
                         this.timerNewRoundGame(io, players_)
                     }
 
