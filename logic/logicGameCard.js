@@ -115,9 +115,10 @@ class logicGameCard {
                         for (let index = 0; index < players_.length; index++) {
                             io.to(players_[index].playerId).emit('response-game-card', this.positionNumberGameCard(res))
                         }
+                        this.timerNewRoundGame(io, players_)
                     }
 
-                    this.timerNewRoundGame(io, players_)
+                    
                     
                 }
             }
