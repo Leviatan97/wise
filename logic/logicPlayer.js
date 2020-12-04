@@ -386,6 +386,109 @@ class logicPlayer {
         }
     }
 
+    playerReachedEndOfTheGame(socket, io) {
+        return () => {
+            let player = players.getPlayer(socket.id)
+            let game = games.getGame(player.hostId);
+            if(!game) {
+                console.log("ya se elimino el juego")
+            }else {
+
+                let gameRemove = games.removeGame(player.hostId)
+                if(!gameRemove) {
+                    console.log("no se elimino el juego")
+                } else {
+                    let players_ = players.getPlayers(player.hostId)
+
+                    for (let index = 0; index < array.length; index++) {
+                        
+                        io.to(players_[index].playerId).emit('game-is-over', 1)
+
+                    }
+                }
+            }
+        }
+    }
+
+    finalPos(socket, io) {
+        return (params) => {
+            let player = players.getPlayer(socket.id)
+            let positionPlayer = players.addPlayerPos(player.hostId, player.playerId, params)
+            let posPlayers = players.getPlayersPos(player.hostId)
+
+            if(!positionPlayer) {
+                console.log("no se guardo la posicion en el tablero")
+            } else {
+                let players_ = players.getPlayers(player.hostId)
+                if(posPlayers.length == players_.length) {
+                    for (let index = 0; index < array.length; index++) {
+                        
+                        io.to(players_[index].playerId).emit('final-results', this.positionsGame(posPlayers))
+                        
+                    }
+                }
+            }
+            
+        }
+    }
+
+    positionsGame(players) {
+        let position = []
+        let playerPos
+        
+        for (let index = 0; index < players.length; index++) {
+            
+            playerPos = {
+                playerId: players[index].playerId,
+                pos: players[index].pos
+            }
+
+            position.push(playerResult)
+            
+        }
+
+        position.sort(this.ascendingOrder)
+
+        return this.positionNumberGame(position)
+    }
+
+    positionNumberGame(players) {
+        let positions = []
+        let position
+        
+        for (let index = 0; index < players.length; index++) {
+            if (index > 0) {
+                if(players[index-1].pos == players[index].pos) {
+                    position = {
+                        playerId: players[index].playerId,
+                        result: players[index].pos,
+                        position: index
+                    }
+                } else {
+                    position = {
+                        playerId: players[index].playerId,
+                        result: players[index].pos,
+                        position: index + 1
+                    }
+                }
+            }else {
+                position = {
+                    playerId: players[index].playerId,
+                    result: players[index].pos,
+                    position: 1
+                }
+            }
+            positions.push(position)
+        }
+
+        return positions
+    }
+
+    
+    ascendingOrder(a, b) {
+        return b.pos - a.pos
+    }
+
     endMiniGame(socket, io) {
         return (params) => {
             console.log("ending minigame");

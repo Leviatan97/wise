@@ -64,6 +64,10 @@ class socketPlayer {
         return socket.on('endminigame', logicPlayer_.endMiniGame(socket, io))
     }
 
+    playerReachedEndOfTheGame(socket, io) {
+        return socket.on('player-reached-end-of-the-Game', logicPlayer_.playerReachedEndOfTheGame(socket, io))
+    }
+
     socketsPlayer(socket, io) {
         this.hostJoin(socket)
         this.playerHostJoin(socket)
@@ -79,6 +83,7 @@ class socketPlayer {
         this.clearInterval(socket, io)
         this.clear(socket)
         this.endMiniGame(socket)
+        this.playerReachedEndOfTheGame(socket, io)
     }
 }
 

@@ -1,6 +1,7 @@
 class modulePlayers {
     constructor () {
         this.players = [];
+        this.playersPos = [];
     }
     addPlayer(hostId, playerId, nameId, profilePic, pos){
         var diceNumber = 0;
@@ -10,6 +11,23 @@ class modulePlayers {
         this.players.push(player);
         return player;
     }
+
+    addPlayerPos(hostId, playerId, pos) {
+        let posPlayer = {
+            hostId: hostId,
+            playerId: playerId,
+            pos: pos
+        }
+
+        this.playersPos.push(posPlayer)
+
+        return posPlayer
+    }
+
+    getPlayersPos(hostId){
+        return this.playersPos.filter((player) => player.hostId === hostId);
+    }
+
     removePlayer(playerId){
         var player = this.getPlayer(playerId);
         
