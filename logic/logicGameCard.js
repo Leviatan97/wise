@@ -117,7 +117,7 @@ class logicGameCard {
                         for (let index = 0; index < players_.length; index++) {
                             io.to(players_[index].playerId).emit('response-game-card', this.positionNumberGameCard(res))
                         }
-                        this.timerGameCard(io, players_)
+                        this.timerNewRoundGame(io, players_)
                     }
                     
                 }
@@ -217,7 +217,7 @@ class logicGameCard {
     }
 
     timerNewRoundGame(io, players) {
-        let time = 2;
+        let time = 5;
             
         setInterval(() => {
             if(time >= 0) {
