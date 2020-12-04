@@ -4,7 +4,7 @@ const { games } = require("../module/moduleGame")
 
 class logicGameCard {
     constructor() {
-        this.rounds = 0;
+        this.rounds = 1;
     }
 
     createGameCard(socket, io) {
@@ -94,16 +94,13 @@ class logicGameCard {
 
                     games.forEach(element => {
                         let point = moduleGameCard_.getPointGameCard(element.gameId, element.playerId)
-                        if(element.round >= 6) {
-                            condition = true
-                        }
 
                         if(point.points >= 3) {
                             points = true
                         }
                     });
                     
-                    if(condition == true) {
+                    if(this.rounds >= 6) {
                         for (let index = 0; index < players_.length; index++) {
                             io.to(players_[index].playerId).emit('position-game-card', this.positionGameCard(games))
                         }
@@ -118,7 +115,6 @@ class logicGameCard {
                             io.to(players_[index].playerId).emit('response-game-card', this.positionNumberGameCard(res))
                         }
                         moduleGameCard_.removeResultGameCard(gameCard.gameId)
-                        console.log(this.rounds)
                         this.rounds += 1;
                         this.timerNewRoundGame(io, players_)
                     }
