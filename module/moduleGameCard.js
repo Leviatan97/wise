@@ -34,7 +34,7 @@ class moduleGameCard {
         var game = this.getResultGameCard(gameId);
         
         if(game){
-            this.gamesCard = this.gamesCard.filter((game) => game.gameId !== gameId);
+            this.resultGameCard = this.resultGameCard.filter((game) => game.gameId !== gameId);
         }
         return game;
     }
