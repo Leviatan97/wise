@@ -83,7 +83,6 @@ class logicGameCard {
                 console.log(`se guardo el resultado ${params.result} del socket ${socket.id}`)
                 const players_ = players.getPlayers(player.hostId)
                 const playersResult = moduleGameCard_.getResultGameCard(gameCard.gameId)
-                console.log(playersResult)
                 console.log(gamesCard)
                 if(gamesCard.length == playersResult.length) {
                     let res  = this.responseGameCard(gameCard.gameId)
@@ -209,8 +208,9 @@ class logicGameCard {
                 } else {
                     moduleGameCard_.editPointsGameCard(gameId, positions[index].playerId)
                 }
-                moduleGameCard_.addRoundGameCard(gameId, positions[index].playerId)
             }
+
+            moduleGameCard_.addRoundGameCard(gameId, positions[index].playerId)
             
         }
     }
