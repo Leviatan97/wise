@@ -253,7 +253,8 @@ class logicPlayer {
     newTurn(socket, io) {
         return (params) => {
             var player = players.getPlayer(socket.id);        
-            var game = games.getGame(player.hostId); //Gets the game data        
+            var game = games.getGame(player.hostId); //Gets the game data    
+            console.log("mirar aqui triple hp "+game.onTurn);
             if(game.onTurn ==1){
                 game.onTurn = 0;
                 var playersInGame = players.getPlayers(player.hostId);
