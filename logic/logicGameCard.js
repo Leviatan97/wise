@@ -118,7 +118,6 @@ class logicGameCard {
                             io.to(players_[index].playerId).emit('response-game-card', this.positionNumberGameCard(res))
                         }
                         moduleGameCard_.removeResultGameCard(gameCard.gameId)
-                        this.rounds += 1;
                         this.timerNewRoundGame(io, players_)
                     }
 
