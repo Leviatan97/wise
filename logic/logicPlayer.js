@@ -280,6 +280,7 @@ class logicPlayer {
             
                 function SetBallot() {
                     iterations++;
+                    console.log("Cualquier cosa");
                     if(iterations<2){
                         playerOnTurn = players.getPlayerByTurn(game.currTurn,player.hostId);                       
                         console.log('Turn Setted for: '+playerOnTurn.nameId);
