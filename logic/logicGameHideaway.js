@@ -47,13 +47,13 @@ class logicGameHideaway {
                     for (let index = 0; index < players_.length; index++) {
                         
                         if(players_[index].onGame != false) {
-                            io.to(players_[index].playerId).emit('init-game-hide-away',{
+                            io.to(players_[index].playerId).emit('init-game-hide-away',[{
                                 operation: operation.operation,
                                 tower: values.tower,
                                 castle: values.castle,
                                 pit: values.pit,
                                 rock: values.rock
-                            })
+                            }])
                         }
                         
                     }
