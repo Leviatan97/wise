@@ -231,9 +231,6 @@ class logicGameCard {
                     
                 }
                 console.log("segundos ronda cartas"+ time)
-                if(time == 0) {
-                    this.timerGameCard(io, players)
-                }
                 time--;
             }
         }, 1000);
