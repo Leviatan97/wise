@@ -228,6 +228,9 @@ class logicGameCard {
                     }
                     
                 }
+                if(time == 0) {
+                    this.timerGameCard(io, players)
+                }
                 time--;
             }
         }, 1000);
