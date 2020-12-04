@@ -31,7 +31,7 @@ class moduleGameCard {
     }
 
     removeResultGameCard(gameId){
-        var game = this.getResultGameCount(gameId);
+        var game = this.getResultGameCard(gameId);
         
         if(game){
             this.gamesCard = this.gamesCard.filter((game) => game.pin !== pin);
