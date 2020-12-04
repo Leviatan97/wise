@@ -84,6 +84,7 @@ class logicGameCard {
                 const players_ = players.getPlayers(player.hostId)
                 const playersResult = moduleGameCard_.getResultGameCard(gameCard.gameId)
                 console.log(playersResult)
+                console.log(gamesCard)
                 if(gamesCard.length == playersResult.length) {
                     let res  = this.responseGameCard(gameCard.gameId)
                     this.addPointsRoundCard(res, gameCard.gameId)
