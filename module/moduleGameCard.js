@@ -54,6 +54,10 @@ class moduleGameCard {
         return this.resultGameCard.filter((game) => game.gameId === gameId)
     }
 
+    getPlayerResultGameCard(gameId, playerId){
+        return this.resultGameCard.filter((game) => game.gameId === gameId)
+    }
+
     editPointsGameCard(gameId, playerId) {
         this.pointsGameCard.forEach(element => {
             if(element.gameId == gameId && element.playerId == playerId) {

@@ -82,6 +82,7 @@ class logicGameCard {
                 console.log(`se guardo el resultado ${params.result} del socket ${socket.id}`)
                 const players_ = players.getPlayers(player.hostId)
                 const playersResult = moduleGameCard_.getResultGameCard(gameCard.gameId)
+                console.log(playersResult)
                 if(gamesCard.length == playersResult.length) {
                     let res  = this.responseGameCard(gameCard.gameId)
                     this.addPointsRoundCard(res, gameCard.gameId)
@@ -99,8 +100,6 @@ class logicGameCard {
                         }
                     });
                     
-                    console.log(condition)
-                    console.log(points)
                     if(condition == true) {
                         for (let index = 0; index < players_.length; index++) {
                             io.to(players_[index].playerId).emit('position-game-card', this.positionGameCard(games))
