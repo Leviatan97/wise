@@ -115,7 +115,6 @@ class logicGameCard {
                     } else {
                         for (let index = 0; index < players_.length; index++) {
                             io.to(players_[index].playerId).emit('response-game-card', this.positionNumberGameCard(res))
-                            moduleGameCard_.addRoundGameCard(gameCard.gameId, players_[index].playerId)
                         }
                         moduleGameCard_.removeResultGameCard(gameCard.gameId)
                         this.timerNewRoundGame(io, players_)
@@ -210,6 +209,7 @@ class logicGameCard {
                 } else {
                     moduleGameCard_.editPointsGameCard(gameId, positions[index].playerId)
                 }
+                moduleGameCard_.addRoundGameCard(gameId, positions[index].playerId)
             }
             
         }
