@@ -228,6 +228,7 @@ class logicPlayer {
             var hostId;
             var playersInGame;
             var paramsPin;
+            var lvl;
             var noBallotsLeft = new Boolean(false);
             console.log('entra bingo');
             //players.addPlayer(socket.id, socket.id, params.nameID); //add player to game
