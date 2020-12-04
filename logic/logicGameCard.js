@@ -102,8 +102,6 @@ class logicGameCard {
                     console.log(condition)
                     console.log(points)
                     if(condition == true) {
-
-                        
                         for (let index = 0; index < players_.length; index++) {
                             io.to(players_[index].playerId).emit('position-game-card', this.positionGameCard(games))
                         }
@@ -117,8 +115,9 @@ class logicGameCard {
                         for (let index = 0; index < players_.length; index++) {
                             io.to(players_[index].playerId).emit('response-game-card', this.positionNumberGameCard(res))
                         }
-                        this.timerNewRoundGame(io, players_)
                     }
+
+                    this.timerNewRoundGame(io, players_)
                     
                 }
             }
