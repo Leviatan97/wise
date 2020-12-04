@@ -94,13 +94,16 @@ class logicGameCard {
 
                     games.forEach(element => {
                         let point = moduleGameCard_.getPointGameCard(element.gameId, element.playerId)
+                        if(element.round >= 6) {
+                            condition = true
+                        }
 
                         if(point.points >= 3) {
                             points = true
                         }
                     });
                     
-                    if(this.rounds >= 6) {
+                    if(condition == true) {
                         for (let index = 0; index < players_.length; index++) {
                             io.to(players_[index].playerId).emit('position-game-card', this.positionGameCard(games))
                         }
