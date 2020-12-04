@@ -402,7 +402,7 @@ class logicPlayer {
                 } else {
                     let players_ = players.getPlayers(player.hostId)
 
-                    for (let index = 0; index < array.length; index++) {
+                    for (let index = 0; index < players_.length; index++) {
                         
                         io.to(players_[index].playerId).emit('game-is-over', 1)
 
