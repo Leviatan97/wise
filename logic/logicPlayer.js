@@ -506,6 +506,7 @@ class logicPlayer {
             var player = players.getPlayer(socket.id);        
             var game = games.getGame(player.hostId); //Gets the game data        
             game.onTurn = 1;
+            clearInterval(game.intervalIdCB);
         }
     }
 
