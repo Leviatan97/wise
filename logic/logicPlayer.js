@@ -270,7 +270,7 @@ class logicPlayer {
                             console.log("player "+playersInGame[n].playerId+" i outside");
                             io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
                             console.log('activating board in new turn '+params.currLevel);
-                            io.to(playersInGame[i].playerId).emit('activate-board', params.currLevel);
+                            io.to(playersInGame[n].playerId).emit('activate-board', params.currLevel);
                             io.to(params.pin).emit('activate-board', params.currLevel);//Sending players data to display
                         }
                 }
@@ -302,7 +302,7 @@ class logicPlayer {
                                     console.log("player "+playersInGame[n].playerId+" i outside");
                                     io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
                                     console.log('activating board in new turn'+params.currLevel);
-                                    io.to(playersInGame[i].playerId).emit('activate-board', params.currLevel);
+                                    io.to(playersInGame[n].playerId).emit('activate-board', params.currLevel);
                                     io.to(params.pin).emit('activate-board', params.currLevel);//Sending players data to display
                                 }
                         }
