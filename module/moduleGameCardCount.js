@@ -11,6 +11,7 @@ class moduleGameCardCount {
         gameId, 
         playerId,
         condition,
+        cards,
         points
     ) {
         let gameCardCount = {
@@ -18,6 +19,7 @@ class moduleGameCardCount {
             gameId:  gameId,
             playerId: playerId,
             condition: condition,
+            cards: cards,
             points: points
         }
         

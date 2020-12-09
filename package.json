@@ -9,6 +9,7 @@
     "moment": "^2.29.1",
     "mongodb": "^3.6.2",
     "mongoose": "^5.10.10",
+    "nodemon": "^2.0.6",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {},
