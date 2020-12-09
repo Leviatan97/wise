@@ -211,7 +211,7 @@ class logicGameCard {
                     moduleGameCard_.editPointsGameCard(gameId, positions[index].playerId)
                 }
             }
-
+            moduleGameCard_.addRoundGameCard(positions[index].playerId)
         }
     }
 
