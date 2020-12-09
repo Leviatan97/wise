@@ -269,8 +269,9 @@ class logicPlayer {
                         {
                             console.log("player "+playersInGame[n].playerId+" i outside");
                             io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
-                    console.log('activating board in new turn '+params.currLevel);
-                    io.to(params.pin).emit('activate-board', params.currLevel);//Sending players data to display
+                            console.log('activating board in new turn '+params.currLevel);
+                            io.to(playersInGame[i].playerId).emit('activate-board', params.currLevel);
+                            io.to(params.pin).emit('activate-board', params.currLevel);//Sending players data to display
                         }
                 }
                 if(typeof game.intervalIdCB === 'undefined'){         
@@ -300,8 +301,9 @@ class logicPlayer {
                                 {
                                     console.log("player "+playersInGame[n].playerId+" i outside");
                                     io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
-                    console.log('activating board in new turn'+params.currLevel);
-                    io.to(params.pin).emit('activate-board', params.currLevel);//Sending players data to display
+                                    console.log('activating board in new turn'+params.currLevel);
+                                    io.to(playersInGame[i].playerId).emit('activate-board', params.currLevel);
+                                    io.to(params.pin).emit('activate-board', params.currLevel);//Sending players data to display
                                 }
                         }
                     }
