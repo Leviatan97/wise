@@ -66,9 +66,9 @@ class moduleGameCard {
         });
     }
 
-    addRoundGameCard(gameId) {
+    addRoundGameCard(playerId) {
         this.gamesCard.forEach(element => {
-            if(element.gameId == gameId) {
+            if(element.playerId == playerId) {
                 element.round += 1 
             }
         });
