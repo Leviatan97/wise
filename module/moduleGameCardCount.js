@@ -56,7 +56,7 @@ class moduleGameCardCount {
         return results
     }
 
-    removeResultGameCard(gameId){
+    removeResultGameCardCount(gameId){
         var game = this.getResultGameCardCount(gameId);
         
         if(game){
@@ -68,8 +68,15 @@ class moduleGameCardCount {
     editPlayerCondition(gameId, playerId) {
         this.gamesHideaway.forEach(element => {
             if(element.gameId == gameId && element.playerId == playerId) {
-                console.log(element.condition)
                 element.condition = false
+            }
+        });
+    }
+
+    editPlayerPoint(gameId) {
+        this.gamesHideaway.forEach(element => {
+            if(element.gameId == gameId && element.condition == true) {
+                element.points += 1
             }
         });
     }
