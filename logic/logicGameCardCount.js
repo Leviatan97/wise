@@ -82,7 +82,7 @@ class logicGameCardCount {
                     const gameCardCountResult = moduleGameCardCount_.getResultGameCardCount(game.gameId)
                     let accumulation = this.numberResult(gameCardCountResult)
                     const players_ = players.getPlayers(player.hostId)
-                    if(accumulation == 32) {
+                    if(accumulation >= 32) {
                         moduleGameCardCount_.editPlayerCondition(game.gameId, player.playerId)
                         moduleGameCardCount_.editPlayerPoint(game.gameId)
                         let games = moduleGameCardCount_.getGames(game.pin)
