@@ -245,7 +245,10 @@ class logicGameCard {
 
         let cards = []
         for (let index = 0; index < 6; index++) {
-            cards[index] = Math.floor(Math.random() * (6 - 1)) + 1
+            let card = {
+                number: Math.floor(Math.random() * (6 - 1)) + 1
+            }
+            cards.push(card)
         }
 
         return cards
