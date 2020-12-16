@@ -66,7 +66,7 @@ class moduleGameCardCount {
     }
 
     editPlayerCondition(gameId, playerId) {
-        this.gamesHideaway.forEach(element => {
+        this.gamesCardCount.forEach(element => {
             if(element.gameId == gameId && element.playerId == playerId) {
                 element.condition = false
             }
@@ -74,7 +74,7 @@ class moduleGameCardCount {
     }
 
     editPlayerPoint(gameId) {
-        this.gamesHideaway.forEach(element => {
+        this.gamesCardCount.forEach(element => {
             if(element.gameId == gameId && element.condition == true) {
                 element.points += 1
             }
@@ -97,7 +97,7 @@ class moduleGameCardCount {
         var game = this.getResultGameCardCount(gameId);
         
         if(game){
-            this.resultGameHideaway = this.resultGameHideaway.filter((game) => game.gameId !== gameId);
+            this.resultGameCardCount = this.resultGameCardCount.filter((game) => game.gameId !== gameId);
         }
         return game;
     }
@@ -106,17 +106,17 @@ class moduleGameCardCount {
         var game = this.getGame(pin);
         
         if(game){
-            this.gamesHideaway = this.gamesCount.filter((game) => game.pin !== pin);
+            this.gamesCardCount = this.gamesCardCount.filter((game) => game.pin !== pin);
         }
         return game;
     }
 
     getGame(pin){
-        return this.gamesHideaway.filter((game) => game.pin === pin)[0]
+        return this.gamesCardCount.filter((game) => game.pin === pin)[0]
     }
 
     getGames(pin){
-        return this.gamesHideaway.filter((game) => game.pin === pin)
+        return this.gamesCardCount.filter((game) => game.pin === pin)
     }
 }
 const moduleGameCardCount_ = new moduleGameCardCount()
