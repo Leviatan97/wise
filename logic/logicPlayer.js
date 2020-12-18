@@ -433,6 +433,7 @@ class logicPlayer {
             } else {
                 let players_ = players.getPlayers(player.hostId)
                 if(posPlayers.length == players_.length) {
+                    console.log(this.positionsGame(posPlayers))
                     for (let index = 0; index < players_.length; index++) {
                         
                         io.to(players_[index].playerId).emit('final-results', this.positionsGame(posPlayers))
