@@ -82,7 +82,9 @@ class logicGameCount {
                 const players_ = players.getPlayers(player.hostId) 
                 const playersResult = moduleGameCount_.getResultGameCount(gameCount.gameId)
 
-                setInterval(() => {
+                let intervalID = setInterval(getResult, 1000);
+                
+                function getResult() {
                     if(playersResult.length == gamesCount.length || time == 0) {
                         for (let index = 0; index < players_.length; index++) {
                             console.log(this.positionsGameCount(playersResult, gameCount.number))
@@ -91,12 +93,11 @@ class logicGameCount {
                         }
                         moduleGameCount_.removeGame(game.pin);
                         moduleGameCount_.removeResultGameCount(gameCount.gameId);
+                        clearInterval(intervalID);
                     } else {
                         time --;
                     }
-                }, 1000);
-                
-                
+                }
             }
         }
     }
