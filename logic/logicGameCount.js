@@ -72,7 +72,7 @@ class logicGameCount {
             const game = games.getGame(player.hostId)
             const gameCount = moduleGameCount_.getGame(game.pin)
             const gamesCount = moduleGameCount_.getGames(game.pin)
-            let onPlayer = 0
+            let time = 3
 
             const response = moduleGameCount_.addResultGameCount(gameCount.gameId, socket.id, params.result)
             if(!response) {
@@ -82,23 +82,19 @@ class logicGameCount {
                 const players_ = players.getPlayers(player.hostId) 
                 const playersResult = moduleGameCount_.getResultGameCount(gameCount.gameId)
 
-                for (let index = 0; index < players.length; index++) {
-                    
-                    if(players[index].onGame != false) {
-                        onPlayer++;
+                setInterval(() => {
+                    if(playersResult.length == gamesCount.length || time == 0) {
+                        for (let index = 0; index < players_.length; index++) {
+                        
+                            io.to(players_[index].playerId).emit('position-game-count', this.positionsGameCount(playersResult, gameCount.number))
+        
+                        }
+                        moduleGameCount_.removeGame(game.pin);
+                        moduleGameCount_.removeResultGameCount(gameCount.gameId);
+                    } else {
+                        time --;
                     }
-                    
-                }
-
-                if(playersResult.length == onPlayer) {
-                    for (let index = 0; index < players_.length; index++) {
-                    
-                        io.to(players_[index].playerId).emit('position-game-count', this.positionsGameCount(playersResult, gameCount.number))
-    
-                    }
-                    moduleGameCount_.removeGame(game.pin);
-                    moduleGameCount_.removeResultGameCount(gameCount.gameId);
-                }
+                }, 1000);
                 
                 
             }
