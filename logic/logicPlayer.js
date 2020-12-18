@@ -525,6 +525,22 @@ class logicPlayer {
         }
     }
 
+    claimSpecialPoint(socket, io) {
+        return (params) => {
+            const player = players.getPlayer(socket.id)
+            const game = games.getGame(player.hostId)
+            let playerOnTurn = players.getPlayerByTurn(game.currTurn,player.hostId);
+            let playersInGame = players.getPlayers(player.hostId);
+
+            playerOnTurn.diceNumber = params.profilePic;
+
+            for(var n = 0; n < playersInGame.length; n++)
+            {                       
+                io.to(playersInGame[n].playerId).emit('moveToSection', playerOnTurn);
+            }
+        }
+    }
+
 }
 
 const logicPlayer_ = new logicPlayer()

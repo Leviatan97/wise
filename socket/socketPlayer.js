@@ -76,6 +76,10 @@ class socketPlayer {
         return socket.on('clear-game', logicPlayer_.removeGame(socket, io))
     }
 
+    claimSpecialPoint(socket, io) {
+        return socket.on('claim-special-point', logicPlayer_.claimSpecialPoint(socket, io))
+    }
+
     socketsPlayer(socket, io) {
         this.hostJoin(socket)
         this.playerHostJoin(socket)
@@ -94,6 +98,7 @@ class socketPlayer {
         this.playerReachedEndOfTheGame(socket, io)
         this.finalPos(socket, io)
         this.clearGame(socket, io)
+        this.claimSpecialPoint(socket, io)
     }
 }
 
