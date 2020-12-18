@@ -527,13 +527,14 @@ class logicPlayer {
 
     claimSpecialPoint(socket, io) {
         return (params) => {
+            console.log("Entro al socket claim-special-point")
             const player = players.getPlayer(socket.id)
             const game = games.getGame(player.hostId)
             let playerOnTurn = players.getPlayerByTurn(game.currTurn,player.hostId);
             let playersInGame = players.getPlayers(player.hostId);
 
             playerOnTurn.diceNumber = params.profilePic;
-            console.log("Entro al socket claim-special-point")
+            
             for(var n = 0; n < playersInGame.length; n++)
             {                       
                 io.to(playersInGame[n].playerId).emit('moveToSection', playerOnTurn);
