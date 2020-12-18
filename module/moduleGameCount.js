@@ -32,7 +32,7 @@ class moduleGameCount {
         var game = this.getResultGameCount(gameId);
         
         if(game){
-            this.gamesCount = this.gamesCount.filter((game) => game.pin !== pin);
+            this.gamesCount = this.gamesCount.filter((game) => game.gameId !== gameId);
         }
         return game;
     }

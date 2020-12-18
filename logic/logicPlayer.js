@@ -512,6 +512,18 @@ class logicPlayer {
         }
     }
 
+    removeGame(socket, io) {
+        return () => {
+            const player = players.getPlayer(socket.id)
+            const game = games.getGame(player.hostId);
+            if(game) {
+                const gameRemove = games.removeGame(player.hostId)
+                io.to(player.playerId).emit('cancel-game', true)
+            }
+
+        }
+    }
+
 }
 
 const logicPlayer_ = new logicPlayer()
