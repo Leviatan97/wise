@@ -87,7 +87,7 @@ class logicGameCount {
                 function getResult() {
                     if(playersResult.length == gamesCount.length || time == 0) {
                         for (let index = 0; index < players_.length; index++) {
-                            console.log(this.positionsGameCount(playersResult, gameCount.number))
+                            console.log(positionsGameCount(playersResult, gameCount.number))
                             io.to(players_[index].playerId).emit('position-game-count', this.positionsGameCount(playersResult, gameCount.number))
         
                         }
@@ -97,6 +97,68 @@ class logicGameCount {
                     } else {
                         time --;
                     }
+                }
+
+                function positionsGameCount(players, result) {
+                    let position = []
+                    let playerResult
+                    
+                    for (let index = 0; index < players.length; index++) {
+                        
+                        if(players[index].result >= result){
+                            playerResult = {
+                                playerId: players[index].playerId,
+                                result: players[index].result - result
+                            }
+                        } else {
+                            playerResult = {
+                                playerId: players[index].playerId,
+                                result:  result - players[index].result
+                            }
+                        }
+                        position.push(playerResult)
+                        
+                    }
+
+                    position.sort(ascendingOrder)
+
+                    return positionNumberGamecount(position)
+                }
+
+                function positionNumberGamecount(players) {
+                    let positions = []
+                    let position
+                    
+                    for (let index = 0; index < players.length; index++) {
+                        if (index > 0) {
+                            if(players[index-1].result == players[index].result) {
+                                position = {
+                                    playerId: players[index].playerId,
+                                    result: players[index].result,
+                                    position: index
+                                }
+                            } else {
+                                position = {
+                                    playerId: players[index].playerId,
+                                    result: players[index].result,
+                                    position: index + 1
+                                }
+                            }
+                        }else {
+                            position = {
+                                playerId: players[index].playerId,
+                                result: players[index].result,
+                                position: 1
+                            }
+                        }
+                        positions.push(position)
+                    }
+            
+                    return positions
+                }
+
+                function ascendingOrder(a, b) {
+                    return a.result - b.result
                 }
             }
         }
