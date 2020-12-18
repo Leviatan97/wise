@@ -80,13 +80,7 @@ class logicGameCount {
                 console.log(`resultado guardado ${params.result} con el socket ${socket.id}`)
                 const players_ = players.getPlayers(player.hostId) 
                 const playersResult = moduleGameCount_.getResultGameCount(gameCount.gameId)
-                for (let index = 0; index < players.length; index++) {
-                    
-                    if(players[index].onGame != false) {
-                        
-                    }
-                    
-                }
+                
                 if(playersResult.length == gamesCount.length) {
                     for (let index = 0; index < players_.length; index++) {
                     
