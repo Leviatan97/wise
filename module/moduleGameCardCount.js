@@ -60,7 +60,7 @@ class moduleGameCardCount {
         var game = this.getResultGameCardCount(gameId);
         
         if(game){
-            this.resultGameCardCount = this.resultGameCardCount.filter((game) => game.pin !== pin);
+            this.resultGameCardCount = this.resultGameCardCount.filter((game) => game.gameId !== gameId);
         }
         return game;
     }
