@@ -72,6 +72,10 @@ class socketPlayer {
         return socket.on('final-pos', logicPlayer_.finalPos(socket, io))
     }
 
+    clearGame(socke, io) {
+        return socket.on('clear-game', logicPlayer_.removeGame(socke, io))
+    }
+
     socketsPlayer(socket, io) {
         this.hostJoin(socket)
         this.playerHostJoin(socket)
@@ -89,6 +93,7 @@ class socketPlayer {
         this.endMiniGame(socket)
         this.playerReachedEndOfTheGame(socket, io)
         this.finalPos(socket, io)
+        this.clearGame(socket, io)
     }
 }
 
