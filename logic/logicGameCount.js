@@ -72,7 +72,7 @@ class logicGameCount {
             const game = games.getGame(player.hostId)
             const gameCount = moduleGameCount_.getGame(game.pin)
             const gamesCount = moduleGameCount_.getGames(game.pin)
-            let time = 3
+            let onPlayer = 0
 
             const response = moduleGameCount_.addResultGameCount(gameCount.gameId, socket.id, params.result)
             if(!response) {
@@ -82,84 +82,25 @@ class logicGameCount {
                 const players_ = players.getPlayers(player.hostId) 
                 const playersResult = moduleGameCount_.getResultGameCount(gameCount.gameId)
 
-                let intervalID = setInterval(getResult, 1000);
+                for (let index = 0; index < players.length; index++) {
+                    
+                    if(players_[index].onGame != false) {
+                        onPlayer++;
+                    }
+                    
+                }
+
+                if(playersResult.length == onPlayer) {
+                    for (let index = 0; index < players_.length; index++) {
+                    
+                        io.to(players_[index].playerId).emit('position-game-count', this.positionsGameCount(playersResult, gameCount.number))
+    
+                    }
+                    moduleGameCount_.removeGame(game.pin);
+                    moduleGameCount_.removeResultGameCount(gameCount.gameId);
+                }
                 
-                function getResult() {
-                    if(playersResult.length == gamesCount.length || time == 0) {
-                        for (let index = 0; index < players_.length; index++) {
-                            console.log(positionsGameCount(playersResult, gameCount.number))
-                            io.to(players_[index].playerId).emit('position-game-count', positionsGameCount(playersResult, gameCount.number))
-        
-                        }
-                        moduleGameCount_.removeGame(game.pin);
-                        moduleGameCount_.removeResultGameCount(gameCount.gameId);
-                        clearInterval(intervalID);
-                    } else {
-                        time --;
-                    }
-                }
-
-                function positionsGameCount(players, result) {
-                    let position = []
-                    let playerResult
-                    
-                    for (let index = 0; index < players.length; index++) {
-                        
-                        if(players[index].result >= result){
-                            playerResult = {
-                                playerId: players[index].playerId,
-                                result: players[index].result - result
-                            }
-                        } else {
-                            playerResult = {
-                                playerId: players[index].playerId,
-                                result:  result - players[index].result
-                            }
-                        }
-                        position.push(playerResult)
-                        
-                    }
-
-                    position.sort(ascendingOrder)
-
-                    return positionNumberGamecount(position)
-                }
-
-                function positionNumberGamecount(players) {
-                    let positions = []
-                    let position
-                    
-                    for (let index = 0; index < players.length; index++) {
-                        if (index > 0) {
-                            if(players[index-1].result == players[index].result) {
-                                position = {
-                                    playerId: players[index].playerId,
-                                    result: players[index].result,
-                                    position: index
-                                }
-                            } else {
-                                position = {
-                                    playerId: players[index].playerId,
-                                    result: players[index].result,
-                                    position: index + 1
-                                }
-                            }
-                        }else {
-                            position = {
-                                playerId: players[index].playerId,
-                                result: players[index].result,
-                                position: 1
-                            }
-                        }
-                        positions.push(position)
-                    }
-            
-                    return positions
-                }
-
-                function ascendingOrder(a, b) {
-                    return a.result - b.result
-                }
+                
             }
         }
     }
