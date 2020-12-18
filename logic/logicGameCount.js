@@ -83,10 +83,9 @@ class logicGameCount {
                 const playersResult = moduleGameCount_.getResultGameCount(gameCount.gameId)
 
                 setInterval(() => {
-                    console.log(time)
                     if(playersResult.length == gamesCount.length || time == 0) {
                         for (let index = 0; index < players_.length; index++) {
-                        
+                            console.log(this.positionsGameCount(playersResult, gameCount.number))
                             io.to(players_[index].playerId).emit('position-game-count', this.positionsGameCount(playersResult, gameCount.number))
         
                         }
