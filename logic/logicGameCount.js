@@ -72,7 +72,6 @@ class logicGameCount {
             const game = games.getGame(player.hostId)
             const gameCount = moduleGameCount_.getGame(game.pin)
             const gamesCount = moduleGameCount_.getGames(game.pin)
-            let onPlayer = 0
 
             const response = moduleGameCount_.addResultGameCount(gameCount.gameId, socket.id, params.result)
             if(!response) {
@@ -82,15 +81,7 @@ class logicGameCount {
                 const players_ = players.getPlayers(player.hostId) 
                 const playersResult = moduleGameCount_.getResultGameCount(gameCount.gameId)
 
-                for (let index = 0; index < players.length; index++) {
-                    
-                    if(players_[index].onGame != false) {
-                        onPlayer++;
-                    }
-                    
-                }
-
-                if(playersResult.length == onPlayer) {
+                if(playersResult.length == gamesCount.length) {
                     for (let index = 0; index < players_.length; index++) {
                     
                         io.to(players_[index].playerId).emit('position-game-count', this.positionsGameCount(playersResult, gameCount.number))
