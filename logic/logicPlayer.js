@@ -567,7 +567,7 @@ class logicPlayer {
             let playersInGame = players.getPlayers(player.hostId);
 
             playerOnTurn.diceNumber = params.profilePic;
-            playerOnTurn.posOnBoard = playerOnTurn.posOnBoard - params.profilePic;
+            playerOnTurn.posOnBoard = params.profilePic;
             
             for(var n = 0; n < playersInGame.length; n++)
             {                       
