@@ -538,14 +538,17 @@ class logicPlayer {
             const game = games.getGame(player.hostId)
             let playerOnTurn = players.getPlayerByTurn(game.currTurn-1,player.hostId);
             let playersInGame = players.getPlayers(player.hostId);
-
+            if(playerOnTurn)
+            {
             playerOnTurn.diceNumber = parseInt(params.profilePic);
             playerOnTurn.posOnBoard = parseInt(params.profilePic);
             
             for(var n = 0; n < playersInGame.length; n++)
             {                       
                 io.to(playersInGame[n].playerId).emit('moveToSpecialSection', playerOnTurn);
+            }    
             }
+            
         }
     }
 
