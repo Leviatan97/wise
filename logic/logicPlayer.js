@@ -375,6 +375,15 @@ class logicPlayer {
              }
         }
     }
+    
+    
+    test12(socket, io) {
+        return (params) => {
+            
+                 console.log('lkjsadkjhskjshkjshiouwykjnhwikujhwqkjhewkjhwq');
+        }
+    }
+    
 
     clearInterval(socket, io) {
         return (params) => {
