@@ -91,7 +91,6 @@ class logicPlayer {
             }
         }
     }
-
     playerJoin(socket, io) {
         return (params) => {
             console.log('entra '+params.nameID +' '+params+' '+params.pin);
