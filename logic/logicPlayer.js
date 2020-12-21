@@ -419,11 +419,6 @@ class logicPlayer {
                 
                 let players_ = players.getPlayers(player.hostId)
 
-                for (let index = 0; index < players_.length; index++) {
-                    
-                    io.to(players_[index].playerId).emit('game-is-over', 1)
-
-                } 
                 for(var n = 0; n < playersInGame.length; n++){
                     
                      io.to(playersInGame[n].playerId).emit('game-is-over', 1);
