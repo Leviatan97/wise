@@ -314,8 +314,7 @@ class logicPlayer {
                             console.log('dice rolled for: '+playerOnTurn.nameId);
                                 var randNum = 0;
                                 while(randNum==0){                            
-                                randNum = Math.floor(Math.random() * 7);
-                                    
+                                    randNum = Math.floor(Math.random() * (6 - 1)) + 1;
                                 }
                                     playerOnTurn.diceNumber = randNum;
                                 for(var n = 0; n < playersInGame.length; n++)
