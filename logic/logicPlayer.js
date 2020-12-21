@@ -341,6 +341,8 @@ class logicPlayer {
     }  
      claimspecialpoint(socket, io) {
         return (params) => {
+           
+                 console.log('lkjsadkjhskjshkjshiouwykjnhwikujhwqkjhewkjhwq');
             var playerOnTurn; 
             var player = players.getPlayer(socket.id);        
             var game = games.getGame(player.hostId); //Gets the game data   
