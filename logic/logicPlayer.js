@@ -536,7 +536,7 @@ class logicPlayer {
             console.log("Entro al socket claim-special-point")
             const player = players.getPlayer(socket.id)
             const game = games.getGame(player.hostId)
-            let playerOnTurn = players.getPlayerByTurn(game.currTurn,player.hostId);
+            let playerOnTurn = players.getPlayerByTurn(game.currTurn-1,player.hostId);
             let playersInGame = players.getPlayers(player.hostId);
 
             playerOnTurn.diceNumber = parseInt(params.profilePic);
