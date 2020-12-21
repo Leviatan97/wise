@@ -338,10 +338,9 @@ class logicPlayer {
                 }
             }
         }
-    }
-    
-      claimspecialpoint(socket, io) {
-          
+    }    
+    claimspecialpoint(socket, io) {
+           console.log('si ven esto lo logro, el maldito hijo de perra lo logro');
         return (params) => {
                 var playerOnTurn; 
           
