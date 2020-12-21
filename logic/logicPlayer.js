@@ -355,7 +355,7 @@ class logicPlayer {
                                 {                       
                                     console.log('posicion actual: '+playerOnTurn.posOnBoard+'dado: '+playerOnTurn.diceNumber);
                                     io.to(playersInGame[n].playerId).emit('moveToSpecialSection', playerOnTurn);
-                                    io.to(playersInGame[n].playerId).emit('autoDice', randNum);     
+                                 //   io.to(playersInGame[n].playerId).emit('autoDice', randNum);     
                                     if(playersInGame[n].onGame ==false)
                                     {
                                         console.log("player "+playersInGame[n].playerId+" i outside");
