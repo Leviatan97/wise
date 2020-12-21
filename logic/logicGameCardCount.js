@@ -100,7 +100,7 @@ class logicGameCardCount {
                         } else {
                             for (let index = 0; index < players_.length; index++) {
                                 io.to(players_[index].playerId).emit('player-eliminated', {
-                                    playerId: player.playerId,
+                                    playerId: players_[index].playerId,
                                     accumulation: accumulation,
                                     cards: this.generateCards()
                                 })
