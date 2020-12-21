@@ -409,6 +409,7 @@ class logicPlayer {
         return () => {
             let player = players.getPlayer(socket.id)
             let game = games.getGame(player.hostId);
+            var playersInGame = players.getPlayers(player.hostId);
 
             console.log("llego a player Reached End Of The Game")
             if(!game) {
@@ -422,6 +423,11 @@ class logicPlayer {
                     
                     io.to(players_[index].playerId).emit('game-is-over', 1)
 
+                } 
+                for(var n = 0; n < playersInGame.length; n++){
+                    
+                     io.to(playersInGame[n].playerId).emit('game-is-over', 1));
+                    
                 }
                
             }
