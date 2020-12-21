@@ -43,7 +43,7 @@ class logicGameHideaway {
                         gameId,
                         true
                     )
-
+                    console.log(values)
                     for (let index = 0; index < players_.length; index++) {
                         
                         if(players_[index].onGame != false) {
