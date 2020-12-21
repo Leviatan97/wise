@@ -339,7 +339,7 @@ class logicPlayer {
             }
         }
     }  
-     claimspecialpoint(socket, io) {
+     claimSpecialpoint(socket, io) {
         return (params) => {
            
                  console.log('lkjsadkjhskjshkjshiouwykjnhwikujhwqkjhewkjhwq');
