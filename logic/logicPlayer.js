@@ -545,7 +545,7 @@ class logicPlayer {
             
             for(var n = 0; n < playersInGame.length; n++)
             {                       
-                io.to(playersInGame[n].playerId).emit('moveToSection', playerOnTurn);
+                io.to(playersInGame[n].playerId).emit('moveToSpecialSection', playerOnTurn);
             }
         }
     }
