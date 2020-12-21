@@ -338,33 +338,7 @@ class logicPlayer {
                 }
             }
         }
-    }  
-     claimSpecialpoint(socket, io) {
-        return (params) => {
-           
-                 console.log('lkjsadkjhskjshkjshiouwykjnhwikujhwqkjhewkjhwq');
-            var playerOnTurn; 
-            var player = players.getPlayer(socket.id);        
-            var game = games.getGame(player.hostId); //Gets the game data   
-            var playersInGame = players.getPlayers(player.hostId);  
-            playerOnTurn = players.getPlayerByTurn(game.currTurn,player.hostId);    
-       
-            playerOnTurn.diceNumber = params.profilePic;
-               for(var n = 0; n < playersInGame.length; n++)
-               {                       
-                 console.log('posicion actual: '+playerOnTurn.posOnBoard+'dado: '+playerOnTurn.diceNumber);
-                 io.to(playersInGame[n].playerId).emit('moveToSpecialSection', playerOnTurn);
-                io.to(playersInGame[n].playerId).emit('autoDice', randNum);     
-                  if(playersInGame[n].onGame ==false)
-                  {
-                     console.log("player "+playersInGame[n].playerId+" i outside");
-                     io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
-                  }
-               }                            
-                             playerOnTurn.posOnBoard =  params.profilePic;
-        }
-    }
-   
+    }     
     minigameDice(socket, io) {
         return (params) => {
             var player = players.getPlayer(socket.id);
