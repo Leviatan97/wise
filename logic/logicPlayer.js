@@ -426,7 +426,7 @@ class logicPlayer {
                 } 
                 for(var n = 0; n < playersInGame.length; n++){
                     
-                     io.to(playersInGame[n].playerId).emit('game-is-over', 1));
+                     io.to(playersInGame[n].playerId).emit('game-is-over', 1);
                     
                 }
                
