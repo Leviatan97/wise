@@ -362,7 +362,6 @@ class logicPlayer {
                   }
                }                            
                              playerOnTurn.posOnBoard =  params.profilePic;
-             }
         }
     }
    
