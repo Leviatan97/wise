@@ -10,11 +10,12 @@ class moduleGame {
         var currPosToInit = 0;
         var currTurn = 0;
         var onTurn = 1;
+        var endGame = false;
         for (var i = 0; i < boardLenght; i++) 
         {
             activeBallots[i] = 0;
         }
-        var game = {pin, hostId, boardLenght, activeBallots, ballots, intervalIdCB,currPosToInit,currTurn,onTurn};
+        var game = {pin, hostId, boardLenght, activeBallots, ballots, intervalIdCB,currPosToInit,currTurn,onTurn,endGame};
         this.games.push(game);
         return game;
     }
@@ -28,6 +29,13 @@ class moduleGame {
     }
     getGame(hostId){
         return this.games.filter((game) => game.hostId === hostId)[0]
+    }
+    endGame(hostId) {
+        this.games.forEach(element => {
+            if(element.hostId == hostId) {
+                element.endGame = true;
+            }
+        });
     }
 }
 const games = new moduleGame()
